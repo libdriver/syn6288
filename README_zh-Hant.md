@@ -1,10 +1,12 @@
+[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md)
+
 <div align=center>
 <img src="/doc/image/logo.png"/>
 </div>
 
 ## LibDriver SYN6288
 
-[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md)
+[![API](https://img.shields.io/badge/api-reference-blue)](https://www.libdriver.com/docs/syn6288/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
 
 SYN6288 中文語音合成芯片是北京宇音天下科技有限公司於 2010 年初推出的一款性價比更高，效果更自然的一款中高端語音合成芯片。 SYN6288 通過異步串口接收待合成的文本，實現文本到聲音（ TTS ）的轉換。最新推出的 SYN6288 語音合成芯片繼承OSYNO6188 的優秀特點：最小 SSOP28L 貼片封裝，硬件接口簡單，極高的性價比；除此之外， SYN6288 文本識別更智能，語音合成更自然，語音合成效果和智能識別效果大幅度提高，是一款面向中高端應用領域的語音合成芯片。
 

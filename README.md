@@ -1,10 +1,12 @@
+[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md)
+
 <div align=center>
 <img src="/doc/image/logo.png"/>
 </div>
 
 ## LibDriver SYN6288
 
-[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md)
+[![API](https://img.shields.io/badge/api-reference-blue)](https://www.libdriver.com/docs/syn6288/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
 
 SYN6288 Chinese speech synthesis chip is a middle and high-end speech synthesis chip with higher cost performance and more natural effect launched by Beijing Yuyintianxia Technology Co., Ltd. in early 2010. SYN6288 receives the text to be synthesized through the asynchronous serial port to realize the text to sound (TTS) conversion. The latest SYN6288 speech synthesis chip inherits the excellent features of OSYNO6188 : the smallest SSOP28L chip package, simple hardware interface and high cost performance; In addition, SYN6288 text recognition is more intelligent, speech synthesis is more natural, and speech synthesis effect and intelligent recognition effect are greatly improved. It is a speech synthesis chip for high-end applications.
 
