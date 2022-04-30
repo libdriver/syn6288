@@ -35,8 +35,8 @@
  * </table>
  */
 
-#ifndef _DRIVER_SYN6288_REGISTER_TEST_H_
-#define _DRIVER_SYN6288_REGISTER_TEST_H_
+#ifndef DRIVER_SYN6288_REGISTER_TEST_H
+#define DRIVER_SYN6288_REGISTER_TEST_H
 
 #include "driver_syn6288_interface.h"
 

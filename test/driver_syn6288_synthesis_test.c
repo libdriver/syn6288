@@ -48,13 +48,14 @@ static syn6288_handle_t gs_handle;        /**< syn6288 handle */
  */
 uint8_t syn6288_synthesis_test(void)
 {
-    volatile uint8_t res;
+    uint8_t res;
     syn6288_info_t info;
     syn6288_status_t status;
-    const uint8_t gb2312_text[] = {0xD3, 0xEE, 0xD2, 0xF4, 0xCC, 0xEC, 0xCF, 0xC2, 0x00};
-    const uint8_t gbk_text[] = {0xD3, 0xEE, 0xD2, 0xF4, 0xCC, 0xEC, 0xCF, 0xC2, 0x00};
-    const uint8_t big5_text[] = {0xA6, 0x74, 0xAD, 0xB5, 0xA4, 0xD1, 0xA4, 0x55, 0x00};
-    const uint8_t unicode_text[] = {0x8B, 0xED, 0x97, 0xF3, 0x59, 0x29, 0x4E, 0x0B, 0x00};
+    char s[32];
+    uint8_t gb2312_text[] = {0xD3, 0xEE, 0xD2, 0xF4, 0xCC, 0xEC, 0xCF, 0xC2, 0x00};
+    uint8_t gbk_text[] = {0xD3, 0xEE, 0xD2, 0xF4, 0xCC, 0xEC, 0xCF, 0xC2, 0x00};
+    uint8_t big5_text[] = {0xA6, 0x74, 0xAD, 0xB5, 0xA4, 0xD1, 0xA4, 0x55, 0x00};
+    uint8_t unicode_text[] = {0x8B, 0xED, 0x97, 0xF3, 0x59, 0x29, 0x4E, 0x0B, 0x00};
     
     /* link interface function */
     DRIVER_SYN6288_LINK_INIT(&gs_handle, syn6288_handle_t);
@@ -68,7 +69,7 @@ uint8_t syn6288_synthesis_test(void)
     
     /* get syn6288 information */
     res = syn6288_info(&info);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: get info failed.\n");
        
@@ -90,7 +91,7 @@ uint8_t syn6288_synthesis_test(void)
     
     /* syn6288 init */
     res = syn6288_init(&gs_handle);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: init failed.\n");
        
@@ -99,50 +100,50 @@ uint8_t syn6288_synthesis_test(void)
     
     /* set baud rate 9600 bps */
     res = syn6288_set_baud_rate(&gs_handle, SYN6288_BAUD_RATE_9600_BPS);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set baud rate failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
     
     /* set common mode */
     res = syn6288_set_mode(&gs_handle, SYN6288_MODE_COMMON);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set mode failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
     
     /* set synthesis volume 16 */
     res = syn6288_set_synthesis_volume(&gs_handle, 16);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set synthesis volume failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
     
     /* set background volume 16 */
     res = syn6288_set_background_volume(&gs_handle, 0);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set background volume failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
     
     /* set synthesis speed 5 */
     res = syn6288_set_synthesis_speed(&gs_handle, 5);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set synthesis speed failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -154,20 +155,20 @@ uint8_t syn6288_synthesis_test(void)
     /* gb2312 synthesis text */
     syn6288_interface_debug_print("syn6288: gb2312 synthesis text.\n");
     res = syn6288_set_text_type(&gs_handle, SYN6288_TYPE_GB2312);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set text type failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
     
     /* synthesis text */
     res = syn6288_synthesis_text(&gs_handle, (char *)gb2312_text);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: synthesis text failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -176,10 +177,10 @@ uint8_t syn6288_synthesis_test(void)
     {
         syn6288_interface_delay_ms(500);
         res = syn6288_get_status(&gs_handle, &status);
-        if (res)
+        if (res != 0)
         {
             syn6288_interface_debug_print("syn6288: get status failed.\n");
-            syn6288_deinit(&gs_handle);
+            (void)syn6288_deinit(&gs_handle);
             
             return 1;
         }
@@ -188,20 +189,20 @@ uint8_t syn6288_synthesis_test(void)
     /* gbk synthesis text */
     syn6288_interface_debug_print("syn6288: gbk synthesis text.\n");
     res = syn6288_set_text_type(&gs_handle, SYN6288_TYPE_GBK);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set text type failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
     
     /* synthesis text */
     res = syn6288_synthesis_text(&gs_handle, (char *)gbk_text);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: synthesis text failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -210,10 +211,10 @@ uint8_t syn6288_synthesis_test(void)
     {
         syn6288_interface_delay_ms(500);
         res = syn6288_get_status(&gs_handle, &status);
-        if (res)
+        if (res != 0)
         {
             syn6288_interface_debug_print("syn6288: get status failed.\n");
-            syn6288_deinit(&gs_handle);
+            (void)syn6288_deinit(&gs_handle);
             
             return 1;
         }
@@ -222,20 +223,20 @@ uint8_t syn6288_synthesis_test(void)
     /* big5 synthesis text */
     syn6288_interface_debug_print("syn6288: big5 synthesis text.\n");
     res = syn6288_set_text_type(&gs_handle, SYN6288_TYPE_BIG5);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set text type failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
     
     /* synthesis text */
     res = syn6288_synthesis_text(&gs_handle, (char *)big5_text);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: synthesis text failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -244,10 +245,10 @@ uint8_t syn6288_synthesis_test(void)
     {
         syn6288_interface_delay_ms(500);
         res = syn6288_get_status(&gs_handle, &status);
-        if (res)
+        if (res != 0)
         {
             syn6288_interface_debug_print("syn6288: get status failed.\n");
-            syn6288_deinit(&gs_handle);
+            (void)syn6288_deinit(&gs_handle);
             
             return 1;
         }
@@ -256,20 +257,20 @@ uint8_t syn6288_synthesis_test(void)
     /* unicode synthesis text */
     syn6288_interface_debug_print("syn6288: unicode synthesis text.\n");
     res = syn6288_set_text_type(&gs_handle, SYN6288_TYPE_UNICODE);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set text type failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
     
     /* synthesis text */
     res = syn6288_synthesis_text(&gs_handle, (char *)unicode_text);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: synthesis text failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -278,10 +279,10 @@ uint8_t syn6288_synthesis_test(void)
     {
         syn6288_interface_delay_ms(500);
         res = syn6288_get_status(&gs_handle, &status);
-        if (res)
+        if (res != 0)
         {
             syn6288_interface_debug_print("syn6288: get status failed.\n");
-            syn6288_deinit(&gs_handle);
+            (void)syn6288_deinit(&gs_handle);
             
             return 1;
         }
@@ -289,10 +290,10 @@ uint8_t syn6288_synthesis_test(void)
     
     /* set gb2312 synthesis text */
     res = syn6288_set_text_type(&gs_handle, SYN6288_TYPE_GB2312);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set text type failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -300,10 +301,10 @@ uint8_t syn6288_synthesis_test(void)
     /* synthesis sound test */
     syn6288_interface_debug_print("syn6288: synthesis sound test.\n");
     res = syn6288_synthesis_sound(&gs_handle, SYN6288_SOUND_A);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: synthesis sound failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -312,10 +313,10 @@ uint8_t syn6288_synthesis_test(void)
     {
         syn6288_interface_delay_ms(500);
         res = syn6288_get_status(&gs_handle, &status);
-        if (res)
+        if (res != 0)
         {
             syn6288_interface_debug_print("syn6288: get status failed.\n");
-            syn6288_deinit(&gs_handle);
+            (void)syn6288_deinit(&gs_handle);
             
             return 1;
         }
@@ -324,10 +325,10 @@ uint8_t syn6288_synthesis_test(void)
     /* synthesis message test */
     syn6288_interface_debug_print("syn6288: synthesis message test.\n");
     res = syn6288_synthesis_message(&gs_handle, SYN6288_MESSAGE_A);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: synthesis message failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -336,10 +337,10 @@ uint8_t syn6288_synthesis_test(void)
     {
         syn6288_interface_delay_ms(500);
         res = syn6288_get_status(&gs_handle, &status);
-        if (res)
+        if (res != 0)
         {
             syn6288_interface_debug_print("syn6288: get status failed.\n");
-            syn6288_deinit(&gs_handle);
+            (void)syn6288_deinit(&gs_handle);
             
             return 1;
         }
@@ -348,10 +349,10 @@ uint8_t syn6288_synthesis_test(void)
     /* synthesis ring test */
     syn6288_interface_debug_print("syn6288: synthesis ring test.\n");
     res = syn6288_synthesis_ring(&gs_handle, SYN6288_RING_E);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: synthesis ring failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -360,10 +361,10 @@ uint8_t syn6288_synthesis_test(void)
     {
         syn6288_interface_delay_ms(500);
         res = syn6288_get_status(&gs_handle, &status);
-        if (res)
+        if (res != 0)
         {
             syn6288_interface_debug_print("syn6288: get status failed.\n");
-            syn6288_deinit(&gs_handle);
+            (void)syn6288_deinit(&gs_handle);
             
             return 1;
         }
@@ -373,29 +374,29 @@ uint8_t syn6288_synthesis_test(void)
     /* synthesis control test */
     syn6288_interface_debug_print("syn6288: synthesis control test.\n");    
     res = syn6288_synthesis_text(&gs_handle, (char *)gb2312_text);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: synthesis text failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
     syn6288_interface_delay_ms(500);
     res = syn6288_pause(&gs_handle);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: pause failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
     syn6288_interface_debug_print("syn6288: synthesis control pause.\n");
     syn6288_interface_delay_ms(5000);
     res = syn6288_resume(&gs_handle);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: resume failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -405,28 +406,28 @@ uint8_t syn6288_synthesis_test(void)
     {
         syn6288_interface_delay_ms(500);
         res = syn6288_get_status(&gs_handle, &status);
-        if (res)
+        if (res != 0)
         {
             syn6288_interface_debug_print("syn6288: get status failed.\n");
-            syn6288_deinit(&gs_handle);
+            (void)syn6288_deinit(&gs_handle);
             
             return 1;
         }
     }
     res = syn6288_synthesis_text(&gs_handle, (char *)gb2312_text);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: synthesis text failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
     syn6288_interface_delay_ms(500);
     res = syn6288_stop(&gs_handle);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: stop failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -436,19 +437,19 @@ uint8_t syn6288_synthesis_test(void)
     /* synthesis volume test */
     syn6288_interface_debug_print("syn6288: synthesis volume test.\n");
     res = syn6288_set_synthesis_volume(&gs_handle, 5);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set background volume failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
     syn6288_interface_debug_print("syn6288: set synthesis volume 5.\n");
     res = syn6288_synthesis_text(&gs_handle, (char *)gb2312_text);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: synthesis text failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -457,19 +458,19 @@ uint8_t syn6288_synthesis_test(void)
     {
         syn6288_interface_delay_ms(500);
         res = syn6288_get_status(&gs_handle, &status);
-        if (res)
+        if (res != 0)
         {
             syn6288_interface_debug_print("syn6288: get status failed.\n");
-            syn6288_deinit(&gs_handle);
+            (void)syn6288_deinit(&gs_handle);
             
             return 1;
         }
     }
     res = syn6288_set_synthesis_volume(&gs_handle, 16);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set background volume failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -477,19 +478,19 @@ uint8_t syn6288_synthesis_test(void)
     /* synthesis speed test */
     syn6288_interface_debug_print("syn6288: synthesis speed test.\n");
     res = syn6288_set_synthesis_speed(&gs_handle, 0);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set synthesis speed failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
     syn6288_interface_debug_print("syn6288: set synthesis speed 0.\n");
     res = syn6288_synthesis_text(&gs_handle, (char *)gb2312_text);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: synthesis text failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -498,19 +499,19 @@ uint8_t syn6288_synthesis_test(void)
     {
         syn6288_interface_delay_ms(500);
         res = syn6288_get_status(&gs_handle, &status);
-        if (res)
+        if (res != 0)
         {
             syn6288_interface_debug_print("syn6288: get status failed.\n");
-            syn6288_deinit(&gs_handle);
+            (void)syn6288_deinit(&gs_handle);
             
             return 1;
         }
     }
     res = syn6288_set_synthesis_speed(&gs_handle, 5);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set synthesis speed failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -521,26 +522,26 @@ uint8_t syn6288_synthesis_test(void)
     /* background mode on */
     syn6288_interface_debug_print("syn6288: background mode on.\n");
     res = syn6288_set_background_volume(&gs_handle, 15);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set background volume failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
     res = syn6288_set_mode(&gs_handle, SYN6288_MODE_BACKGROUND_1);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set mode failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
     res = syn6288_synthesis_text(&gs_handle, (char *)gb2312_text);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: synthesis text failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -549,10 +550,10 @@ uint8_t syn6288_synthesis_test(void)
     {
         syn6288_interface_delay_ms(500);
         res = syn6288_get_status(&gs_handle, &status);
-        if (res)
+        if (res != 0)
         {
             syn6288_interface_debug_print("syn6288: get status failed.\n");
-            syn6288_deinit(&gs_handle);
+            (void)syn6288_deinit(&gs_handle);
             
             return 1;
         }
@@ -561,19 +562,23 @@ uint8_t syn6288_synthesis_test(void)
     /* command test */
     syn6288_interface_debug_print("syn6288: command test.\n");
     syn6288_interface_debug_print("syn6288: set command 0.\n");
-    res = syn6288_set_command(&gs_handle, "[b0]");
-    if (res)
+    memset(s, 0, sizeof(char) * 32);
+    strncpy(s, "[b0]", 32);
+    res = syn6288_set_command(&gs_handle, s);
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set command failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
-    res = syn6288_synthesis_text(&gs_handle, (char *)"110,120,130");
-    if (res)
+    memset(s, 0, sizeof(char) * 32);
+    strncpy(s, "110,120,130", 32);
+    res = syn6288_synthesis_text(&gs_handle, s);
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: synthesis text failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -582,28 +587,32 @@ uint8_t syn6288_synthesis_test(void)
     {
         syn6288_interface_delay_ms(500);
         res = syn6288_get_status(&gs_handle, &status);
-        if (res)
+        if (res != 0)
         {
             syn6288_interface_debug_print("syn6288: get status failed.\n");
-            syn6288_deinit(&gs_handle);
+            (void)syn6288_deinit(&gs_handle);
             
             return 1;
         }
     }
     syn6288_interface_debug_print("syn6288: set command 1.\n");
-    res = syn6288_set_command(&gs_handle, "[b1]");
-    if (res)
+    memset(s, 0, sizeof(char) * 32);
+    strncpy(s, "[b1]", 32);
+    res = syn6288_set_command(&gs_handle, s);
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set command failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
-    res = syn6288_synthesis_text(&gs_handle, (char *)"110,120,130");
-    if (res)
+    memset(s, 0, sizeof(char) * 32);
+    strncpy(s, "110,120,130", 32);
+    res = syn6288_synthesis_text(&gs_handle, s);
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: synthesis text failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -612,10 +621,10 @@ uint8_t syn6288_synthesis_test(void)
     {
         syn6288_interface_delay_ms(500);
         res = syn6288_get_status(&gs_handle, &status);
-        if (res)
+        if (res != 0)
         {
             syn6288_interface_debug_print("syn6288: get status failed.\n");
-            syn6288_deinit(&gs_handle);
+            (void)syn6288_deinit(&gs_handle);
             
             return 1;
         }
@@ -623,7 +632,7 @@ uint8_t syn6288_synthesis_test(void)
     
     /* finish synthesis test */
     syn6288_interface_debug_print("syn6288: finish synthesis test.\n");
-    syn6288_deinit(&gs_handle);
+    (void)syn6288_deinit(&gs_handle);
     
     return 0;
 }

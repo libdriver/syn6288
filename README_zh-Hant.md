@@ -1,4 +1,4 @@
-[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md)
+[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md) | [日本語](/README_ja.md) | [Deutsch](/README_de.md) | [한국어](/README_ko.md)
 
 <div align=center>
 <img src="/doc/image/logo.png"/>
@@ -6,11 +6,11 @@
 
 ## LibDriver SYN6288
 
-[![API](https://img.shields.io/badge/api-reference-blue)](https://www.libdriver.com/docs/syn6288/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
+[![MISRA](https://img.shields.io/badge/misra-compliant-brightgreen.svg)](/misra/README.md) [![API](https://img.shields.io/badge/api-reference-blue.svg)](https://www.libdriver.com/docs/syn6288/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
 
 SYN6288 中文語音合成芯片是北京宇音天下科技有限公司於 2010 年初推出的一款性價比更高，效果更自然的一款中高端語音合成芯片。 SYN6288 通過異步串口接收待合成的文本，實現文本到聲音（ TTS ）的轉換。最新推出的 SYN6288 語音合成芯片繼承OSYNO6188 的優秀特點：最小 SSOP28L 貼片封裝，硬件接口簡單，極高的性價比；除此之外， SYN6288 文本識別更智能，語音合成更自然，語音合成效果和智能識別效果大幅度提高，是一款面向中高端應用領域的語音合成芯片。
 
-LibDriver SYN6288 是LibDriver推出的SYN6288 的全功能驅動，該驅動提供文本合成、音樂合成、報警聲音合成等功能。
+LibDriver SYN6288 是LibDriver推出的SYN6288 的全功能驅動，該驅動提供文本合成、音樂合成、報警聲音合成等功能並且它符合MISRA標準。
 
 ### 目錄
 
@@ -54,7 +54,7 @@ LibDriver SYN6288 是LibDriver推出的SYN6288 的全功能驅動，該驅動提
 uint8_t res;
 
 res = syn6288_basic_init();
-if (res)
+if (res != 0)
 {
     return 1;
 }
@@ -62,17 +62,17 @@ if (res)
 ...
 
 res = syn6288_basic_synthesis("你好");
-if (res)
+if (res != 0)
 {
-    syn6288_basic_deinit();
+    (void)syn6288_basic_deinit();
 
     return 1;
 }
-syn6288_basic_sync();
+(void)syn6288_basic_sync();
 
 ...
 
-syn6288_basic_deinit();
+(void)syn6288_basic_deinit();
 
 return 0;
 ```
@@ -83,7 +83,7 @@ return 0;
 uint8_t res;
 
 res = syn6288_advance_init();
-if (res)
+if (res != 0)
 {
     return 1;
 }
@@ -91,50 +91,50 @@ if (res)
 ...
 
 res = syn6288_advance_synthesis("你好");
-if (res)
+if (res != 0)
 {
-    syn6288_advance_deinit();
+    (void)syn6288_advance_deinit();
 
     return 1;
 }
-syn6288_advance_sync();
+(void)syn6288_advance_sync();
 
 ...
 
 res = syn6288_advance_sound(SYN6288_SOUND_A);
-if (res)
+if (res != 0)
 {
-    syn6288_advance_deinit();
+    (void)syn6288_advance_deinit();
 
     return 1;
 }
-syn6288_advance_sync()    
+(void)syn6288_advance_sync()    
 
 ...
     
 res = syn6288_advance_message(SYN6288_MESSAGE_A);
-if (res)
+if (res != 0)
 {
-    syn6288_advance_deinit();
+    (void)syn6288_advance_deinit();
 
     return 1;
 }
-syn6288_advance_sync();
+(void)syn6288_advance_sync();
 
 ...
 
 res = syn6288_advance_ring(SYN6288_RING_A);
-if (res)
+if (res != 0)
 {
-    syn6288_advance_deinit();
+    (void)syn6288_advance_deinit();
 
     return 1;
 }
-syn6288_advance_sync();
+(void)syn6288_advance_sync();
 
 ...
     
-syn6288_advance_deinit();
+(void)syn6288_advance_deinit();
 
 return 0;
 ```

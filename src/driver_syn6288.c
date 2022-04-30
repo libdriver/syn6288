@@ -106,7 +106,7 @@ uint8_t syn6288_init(syn6288_handle_t *handle)
         return 3;                                                      /* return error */
     }
 
-    if (handle->uart_init())                                           /* uart init */
+    if (handle->uart_init() != 0)                                      /* uart init */
     {
         handle->debug_print("syn6288: uart init failed.\n");           /* uart init failed */
         
@@ -129,10 +129,10 @@ uint8_t syn6288_init(syn6288_handle_t *handle)
  */
 uint8_t syn6288_deinit(syn6288_handle_t *handle)
 {
-    volatile uint8_t res;
-    volatile uint16_t len;
-    volatile uint8_t temp;
-    volatile uint8_t cmd[5];
+    uint8_t res;
+    uint16_t len;
+    uint8_t temp;
+    uint8_t cmd[5];
     
     if (handle == NULL)                                                   /* check handle */
     {
@@ -149,14 +149,14 @@ uint8_t syn6288_deinit(syn6288_handle_t *handle)
     cmd[3] = 0x88;                                                        /* command */
     cmd[4] = 0x77;                                                        /* xor */
     res = handle->uart_flush();                                           /* uart flush */
-    if (res)                                                              /* check result */
+    if (res != 0)                                                         /* check result */
     {
         handle->debug_print("syn6288: uart flush failed.\n");             /* uart flush failed */
         
         return 1;                                                         /* return error */
     }
     res = handle->uart_write((uint8_t *)cmd, 5);                          /* uart write */
-    if (res)                                                              /* check result */
+    if (res != 0)                                                         /* check result */
     {
         handle->debug_print("syn6288: uart write failed.\n");             /* uart write failed */
         
@@ -172,7 +172,7 @@ uint8_t syn6288_deinit(syn6288_handle_t *handle)
     }
     if (temp == 0x41)                                                     /* check return */
     {
-        if (handle->uart_deinit())                                        /* uart deinit */
+        if (handle->uart_deinit() != 0)                                   /* uart deinit */
         {
             handle->debug_print("syn6288: uart deinit failed.\n");        /* uart deinit failed */
             
@@ -203,74 +203,76 @@ uint8_t syn6288_deinit(syn6288_handle_t *handle)
  */
 uint8_t syn6288_get_status(syn6288_handle_t *handle, syn6288_status_t *status)
 {
-    volatile uint8_t res;
-    volatile uint8_t times = 3;
-    volatile uint16_t len;
-    volatile uint8_t temp[2];
-    volatile uint8_t cmd[5];
+    uint8_t res;
+    uint8_t times = 3;
+    uint16_t len;
+    uint8_t temp[2];
+    uint8_t cmd[5];
     
-    if (handle == NULL)                                                   /* check handle */
+    if (handle == NULL)                                                       /* check handle */
     {
-        return 2;                                                         /* return error */
+        return 2;                                                             /* return error */
     }
-    if (handle->inited != 1)                                              /* check handle initialization */
+    if (handle->inited != 1)                                                  /* check handle initialization */
     {
-        return 3;                                                         /* return error */
+        return 3;                                                             /* return error */
     }
     
-    cmd[0] = 0xFD;                                                        /* frame header */
-    cmd[1] = 0x00;                                                        /* length msb */
-    cmd[2] = 0x02;                                                        /* length lsb */
-    cmd[3] = 0x21;                                                        /* command */
-    cmd[4] = 0xDE;                                                        /* xor */
-    
-    retry:
-    res = handle->uart_flush();                                           /* uart flush */
-    if (res)                                                              /* check result */
+    cmd[0] = 0xFD;                                                            /* frame header */
+    cmd[1] = 0x00;                                                            /* length msb */
+    cmd[2] = 0x02;                                                            /* length lsb */
+    cmd[3] = 0x21;                                                            /* command */
+    cmd[4] = 0xDE;                                                            /* xor */
+    while (1)                                                                 /* loop */
     {
-        handle->debug_print("syn6288: uart flush failed.\n");             /* uart flush failed */
-        
-        return 1;                                                         /* return error */
-    }
-    res = handle->uart_write((uint8_t *)cmd, 5);                          /* uart write */
-    if (res)                                                              /* check result */
-    {
-        handle->debug_print("syn6288: uart write failed.\n");             /* uart write failed */
-        
-        return 1;                                                         /* return error */
-    }
-    handle->delay_ms(100);                                                /* delay 100 ms */
-    len = handle->uart_read((uint8_t *)temp, 2);                          /* uart read */
-    if (len != 2)                                                         /* check result */
-    {
-        handle->debug_print("syn6288: uart read failed.\n");              /* uart read failed */
-        
-        return 1;                                                         /* return error */
-    }
-    if ((temp[0] == 0x41) && (temp[1] == 0x4F))                           /* check frame */
-    {
-        *status = (syn6288_status_t)(0);                                  /* set status */
-        
-        return 0;                                                         /* success return 0 */
-    }
-    else if ((temp[0] == 0x41) && (temp[1] == 0x4E))                      /* check frame */
-    {
-        *status = (syn6288_status_t)(1);                                  /* set status */
-        
-        return 0;                                                         /* success return 0 */
-    }
-    else
-    {
-        if (times)                                                        /* check times */
+        res = handle->uart_flush();                                           /* uart flush */
+        if (res != 0)                                                         /* check result */
         {
-            times--;                                                      /* retry times-- */
-            handle->delay_ms(100);                                        /* delay 100 ms */
+            handle->debug_print("syn6288: uart flush failed.\n");             /* uart flush failed */
             
-            goto retry;                                                   /* goto retry */
+            return 1;                                                         /* return error */
         }
-        handle->debug_print("syn6288: command receive failed.\n");        /* command receive failed */
-        
-        return 1;                                                         /* return error */
+        res = handle->uart_write((uint8_t *)cmd, 5);                          /* uart write */
+        if (res != 0)                                                         /* check result */
+        {
+            handle->debug_print("syn6288: uart write failed.\n");             /* uart write failed */
+            
+            return 1;                                                         /* return error */
+        }
+        handle->delay_ms(100);                                                /* delay 100 ms */
+        memset(temp, 0, sizeof(uint8_t) * 2);                                 /* clear the buffer */
+        len = handle->uart_read((uint8_t *)temp, 2);                          /* uart read */
+        if (len != 2)                                                         /* check result */
+        {
+            handle->debug_print("syn6288: uart read failed.\n");              /* uart read failed */
+            
+            return 1;                                                         /* return error */
+        }
+        if ((temp[0] == 0x41) && (temp[1] == 0x4F))                           /* check frame */
+        {
+            *status = (syn6288_status_t)(0);                                  /* set status */
+            
+            return 0;                                                         /* success return 0 */
+        }
+        else if ((temp[0] == 0x41) && (temp[1] == 0x4E))                      /* check frame */
+        {
+            *status = (syn6288_status_t)(1);                                  /* set status */
+            
+            return 0;                                                         /* success return 0 */
+        }
+        else
+        {
+            if (times != 0)                                                   /* check times */
+            {
+                times--;                                                      /* retry times-- */
+                handle->delay_ms(100);                                        /* delay 100 ms */
+                
+                continue;                                                     /* continue */
+            }
+            handle->debug_print("syn6288: command receive failed.\n");        /* command receive failed */
+            
+            return 1;                                                         /* return error */
+        }
     }
 }
 
@@ -286,10 +288,10 @@ uint8_t syn6288_get_status(syn6288_handle_t *handle, syn6288_status_t *status)
  */
 uint8_t syn6288_stop(syn6288_handle_t *handle)
 {
-    volatile uint8_t res;
-    volatile uint16_t len;
-    volatile uint8_t temp;
-    volatile uint8_t cmd[5];
+    uint8_t res;
+    uint16_t len;
+    uint8_t temp;
+    uint8_t cmd[5];
     
     if (handle == NULL)                                                    /* check handle */
     {
@@ -306,14 +308,14 @@ uint8_t syn6288_stop(syn6288_handle_t *handle)
     cmd[3] = 0x02;                                                         /* command */
     cmd[4] = 0xFD;                                                         /* xor */
     res = handle->uart_flush();                                            /* uart flush */
-    if (res)                                                               /* check result */
+    if (res != 0)                                                          /* check result */
     {
         handle->debug_print("syn6288: uart flush failed.\n");              /* uart flush failed */
         
         return 1;                                                          /* return error */
     }
     res = handle->uart_write((uint8_t *)cmd, 5);                           /* uart write */
-    if (res)                                                               /* check result */
+    if (res != 0)                                                          /* check result */
     {
         handle->debug_print("syn6288: uart write failed.\n");              /* uart write failed */
         
@@ -351,10 +353,10 @@ uint8_t syn6288_stop(syn6288_handle_t *handle)
  */
 uint8_t syn6288_pause(syn6288_handle_t *handle)
 {
-    volatile uint8_t res;
-    volatile uint16_t len;
-    volatile uint8_t temp;
-    volatile uint8_t cmd[5];
+    uint8_t res;
+    uint16_t len;
+    uint8_t temp;
+    uint8_t cmd[5];
     
     if (handle == NULL)                                                   /* check handle */
     {
@@ -371,14 +373,14 @@ uint8_t syn6288_pause(syn6288_handle_t *handle)
     cmd[3] = 0x03;                                                        /* command */
     cmd[4] = 0xFC;                                                        /* xor */
     res = handle->uart_flush();                                           /* uart flush */
-    if (res)                                                              /* check result */
+    if (res != 0)                                                         /* check result */
     {
         handle->debug_print("syn6288: uart flush failed.\n");             /* uart flush failed */
         
         return 1;                                                         /* return error */
     }
     res = handle->uart_write((uint8_t *)cmd, 5);                          /* uart write */
-    if (res)                                                              /* check result */
+    if (res != 0)                                                         /* check result */
     {
         handle->debug_print("syn6288: uart write failed.\n");             /* uart write failed */
         
@@ -416,10 +418,10 @@ uint8_t syn6288_pause(syn6288_handle_t *handle)
  */
 uint8_t syn6288_resume(syn6288_handle_t *handle)
 {
-    volatile uint8_t res;
-    volatile uint16_t len;
-    volatile uint8_t temp;
-    volatile uint8_t cmd[5];
+    uint8_t res;
+    uint16_t len;
+    uint8_t temp;
+    uint8_t cmd[5];
     
     if (handle == NULL)                                                   /* check handle */
     {
@@ -436,14 +438,14 @@ uint8_t syn6288_resume(syn6288_handle_t *handle)
     cmd[3] = 0x04;                                                        /* command */
     cmd[4] = 0xFB;                                                        /* xor */
     res = handle->uart_flush();                                           /* uart flush */
-    if (res)                                                              /* check result */
+    if (res != 0)                                                         /* check result */
     {
         handle->debug_print("syn6288: uart flush failed.\n");             /* uart flush failed */
         
         return 1;                                                         /* return error */
     }
     res = handle->uart_write((uint8_t *)cmd, 5);                          /* uart write */
-    if (res)                                                              /* check result */
+    if (res != 0)                                                         /* check result */
     {
         handle->debug_print("syn6288: uart write failed.\n");             /* uart write failed */
         
@@ -481,10 +483,10 @@ uint8_t syn6288_resume(syn6288_handle_t *handle)
  */
 uint8_t syn6288_power_down(syn6288_handle_t *handle)
 {
-    volatile uint8_t res;
-    volatile uint16_t len;
-    volatile uint8_t temp;
-    volatile uint8_t cmd[5];
+    uint8_t res;
+    uint16_t len;
+    uint8_t temp;
+    uint8_t cmd[5];
     
     if (handle == NULL)                                                   /* check handle */
     {
@@ -501,14 +503,14 @@ uint8_t syn6288_power_down(syn6288_handle_t *handle)
     cmd[3] = 0x88;                                                        /* command */
     cmd[4] = 0x77;                                                        /* xor */
     res = handle->uart_flush();                                           /* uart flush */
-    if (res)                                                              /* check result */
+    if (res != 0)                                                         /* check result */
     {
         handle->debug_print("syn6288: uart flush failed.\n");             /* uart flush failed */
         
         return 1;                                                         /* return error */
     }
     res = handle->uart_write((uint8_t *)cmd, 5);                          /* uart write */
-    if (res)                                                              /* check result */
+    if (res != 0)                                                         /* check result */
     {
         handle->debug_print("syn6288: uart write failed.\n");             /* uart write failed */
         
@@ -547,10 +549,10 @@ uint8_t syn6288_power_down(syn6288_handle_t *handle)
  */
 uint8_t syn6288_set_baud_rate(syn6288_handle_t *handle, syn6288_baud_rate_t rate)
 {
-    volatile uint8_t res;
-    volatile uint16_t len;
-    volatile uint8_t temp;
-    volatile uint8_t cmd[6];
+    uint8_t res;
+    uint16_t len;
+    uint8_t temp;
+    uint8_t cmd[6];
     
     if (handle == NULL)                                                   /* check handle */
     {
@@ -593,20 +595,22 @@ uint8_t syn6288_set_baud_rate(syn6288_handle_t *handle, syn6288_baud_rate_t rate
         }
         default :
         {
-            handle->debug_print("syn6288: baud rate error.\n");           /* baud rate error */
+            handle->rate = rate;                                          /* set rate */
+            cmd[4] = 0x00;                                                /* baud rate */
+            cmd[5] = 0xCF;                                                /* xor */
             
-            return 1;                                                     /* return error */
+            break;                                                        /* break */
         }
     }
     res = handle->uart_flush();                                           /* uart flush */
-    if (res)                                                              /* check result */
+    if (res != 0)                                                         /* check result */
     {
         handle->debug_print("syn6288: uart flush failed.\n");             /* uart flush failed */
             
         return 1;                                                         /* return error */
     }
     res = handle->uart_write((uint8_t *)cmd, 6);                          /* uart write */
-    if (res)                                                              /* check result */
+    if (res != 0)                                                         /* check result */
     {
         handle->debug_print("syn6288: uart write failed.\n");             /* uart write failed */
         
@@ -679,7 +683,7 @@ uint8_t syn6288_set_mode(syn6288_handle_t *handle, syn6288_mode_t mode)
         return 3;                   /* return error */
     }
     
-    handle->mode = mode;            /* set mode */
+    handle->mode = (uint8_t)mode;   /* set mode */
     
     return 0;                       /* success return 0 */
 }
@@ -731,7 +735,7 @@ uint8_t syn6288_set_text_type(syn6288_handle_t *handle, syn6288_type_t type)
         return 3;                   /* return error */
     }
     
-    handle->type = type;            /* set type */
+    handle->type = (uint8_t)type;   /* set type */
     
     return 0;                       /* success return 0 */
 }
@@ -775,12 +779,12 @@ uint8_t syn6288_get_text_type(syn6288_handle_t *handle, syn6288_type_t *type)
  */
 uint8_t syn6288_synthesis_sound(syn6288_handle_t *handle, syn6288_sound_t sound)
 {
-    volatile uint8_t res;
-    volatile uint16_t len;
-    volatile uint8_t temp;
-    volatile uint8_t i;
-    volatile uint8_t xor_cal = 0;
-    volatile char cmd[6];
+    uint8_t res;
+    uint16_t len;
+    uint8_t temp;
+    uint8_t i;
+    uint8_t xor_cal = 0;
+    char cmd[6];
     
     if (handle == NULL)                                                   /* check handle */
     {
@@ -809,14 +813,14 @@ uint8_t syn6288_synthesis_sound(syn6288_handle_t *handle, syn6288_sound_t sound)
     }
     handle->buf[6+5] = xor_cal;                                           /* set xor */
     res = handle->uart_flush();                                           /* uart flush */
-    if (res)                                                              /* check result */
+    if (res != 0)                                                         /* check result */
     {
         handle->debug_print("syn6288: uart flush failed.\n");             /* uart flush failed */
         
         return 1;                                                         /* return error */
     }
     res = handle->uart_write((uint8_t *)handle->buf, 6+6);                /* uart write */
-    if (res)                                                              /* check result */
+    if (res != 0)                                                         /* check result */
     {
         handle->debug_print("syn6288: uart write failed.\n");             /* uart write failed */
         
@@ -855,12 +859,12 @@ uint8_t syn6288_synthesis_sound(syn6288_handle_t *handle, syn6288_sound_t sound)
  */
 uint8_t syn6288_synthesis_message(syn6288_handle_t *handle, syn6288_message_t message)
 {
-    volatile uint8_t res;
-    volatile uint16_t len;
-    volatile uint8_t temp;
-    volatile uint8_t i;
-    volatile uint8_t xor_cal = 0;
-    volatile char cmd[4];
+    uint8_t res;
+    uint16_t len;
+    uint8_t temp;
+    uint8_t i;
+    uint8_t xor_cal = 0;
+    char cmd[4];
     
     if (handle == NULL)                                                   /* check handle */
     {
@@ -887,14 +891,14 @@ uint8_t syn6288_synthesis_message(syn6288_handle_t *handle, syn6288_message_t me
     } 
     handle->buf[4+5] = xor_cal;                                           /* set xor */
     res = handle->uart_flush();                                           /* uart flush */
-    if (res)                                                              /* check result */
+    if (res != 0)                                                         /* check result */
     {
         handle->debug_print("syn6288: uart flush failed.\n");             /* uart flush failed */
         
         return 1;                                                         /* return error */
     }
     res = handle->uart_write((uint8_t *)handle->buf, 6 + 4);              /* uart write */
-    if (res)                                                              /* check result */
+    if (res != 0)                                                         /* check result */
     {
         handle->debug_print("syn6288: uart write failed.\n");             /* uart write failed */
         
@@ -933,12 +937,12 @@ uint8_t syn6288_synthesis_message(syn6288_handle_t *handle, syn6288_message_t me
  */
 uint8_t syn6288_synthesis_ring(syn6288_handle_t *handle, syn6288_ring_t ring)
 {
-    volatile uint8_t res;
-    volatile uint16_t len;
-    volatile uint8_t temp;
-    volatile uint8_t i;
-    volatile uint8_t xor_cal = 0;
-    volatile char cmd[5];
+    uint8_t res;
+    uint16_t len;
+    uint8_t temp;
+    uint8_t i;
+    uint8_t xor_cal = 0;
+    char cmd[5];
     
     if (handle == NULL)                                                   /* check handle */
     {
@@ -966,14 +970,14 @@ uint8_t syn6288_synthesis_ring(syn6288_handle_t *handle, syn6288_ring_t ring)
     }
     handle->buf[5+5] = xor_cal;                                           /* set xor */
     res = handle->uart_flush();                                           /* uart flush */
-    if (res)                                                              /* check result */
+    if (res != 0)                                                         /* check result */
     {
         handle->debug_print("syn6288: uart flush failed.\n");             /* uart flush failed */
        
         return 1;                                                         /* return error */
     }
     res = handle->uart_write((uint8_t *)handle->buf, 6+5);                /* uart write */
-    if (res)                                                              /* check result */
+    if (res != 0)                                                         /* check result */
     {
         handle->debug_print("syn6288: uart write failed.\n");             /* uart write failed */
         
@@ -1012,11 +1016,11 @@ uint8_t syn6288_synthesis_ring(syn6288_handle_t *handle, syn6288_ring_t ring)
  */
 uint8_t syn6288_synthesis_text(syn6288_handle_t *handle, char *text)
 {
-    volatile uint8_t res;
-    volatile uint16_t l;
-    volatile uint8_t len, temp;
-    volatile uint8_t i;
-    volatile uint8_t xor_cal = 0;
+    uint8_t res;
+    uint16_t l;
+    uint8_t len, temp;
+    uint8_t i;
+    uint8_t xor_cal = 0;
     
     if (handle == NULL)                                                   /* check handle */
     {
@@ -1027,7 +1031,7 @@ uint8_t syn6288_synthesis_text(syn6288_handle_t *handle, char *text)
         return 3;                                                         /* return error */
     }
     
-    len = strlen(text);                                                   /* get length of text */
+    len = (uint8_t)strlen(text);                                          /* get length of text */
     if (len > 200)                                                        /* check length */
     {
         handle->debug_print("syn6288: text is too long.\n");              /* text is too long */
@@ -1035,7 +1039,7 @@ uint8_t syn6288_synthesis_text(syn6288_handle_t *handle, char *text)
         return 1;                                                         /* return error */
     }
     handle->buf[0] = 0xFD;                                                /* frame header */
-    handle->buf[1] = (len + 3) / 256;                                     /* length msb */
+    handle->buf[1] = (uint8_t)((len + 3) / 256);                          /* length msb */
     handle->buf[2] = (len + 3) % 256;                                     /* length lsb */
     handle->buf[3] = 0x01;                                                /* command */
     handle->buf[4] = handle->mode|handle->type;                           /* command param */
@@ -1046,14 +1050,14 @@ uint8_t syn6288_synthesis_text(syn6288_handle_t *handle, char *text)
     }
     handle->buf[len+5] = xor_cal;                                         /* set xor */
     res = handle->uart_flush();                                           /* uart flush */ 
-    if (res)                                                              /* check result */
+    if (res != 0)                                                         /* check result */
     {
         handle->debug_print("syn6288: uart flush failed.\n");             /* uart flush failed */
         
         return 1;                                                         /* return error */
     }
     res = handle->uart_write((uint8_t *)handle->buf, len+6);              /* uart write */
-    if (res)                                                              /* check result */
+    if (res != 0)                                                         /* check result */
     {
         handle->debug_print("syn6288: uart write failed.\n");             /* uart write failed */
         
@@ -1092,7 +1096,7 @@ uint8_t syn6288_synthesis_text(syn6288_handle_t *handle, char *text)
  */
 uint8_t syn6288_set_synthesis_volume(syn6288_handle_t *handle, uint8_t volume)
 {
-    volatile char cmd[8];
+    char cmd[8];
     
     if (volume > 16)                                              /* check volume */
     {
@@ -1102,7 +1106,7 @@ uint8_t syn6288_set_synthesis_volume(syn6288_handle_t *handle, uint8_t volume)
     }
     
     memset((char *)cmd, 0, sizeof(char)*8);                       /* memory set 0 */
-    snprintf((char *)cmd, 8, "v[%d]", volume);                    /* set command */
+    (void)snprintf((char *)cmd, 8, "v[%d]", (int16_t)volume);     /* set command */
     handle->volume = volume;                                      /* save colume */
     
     return syn6288_set_command(handle, (char *)cmd);              /* write command */
@@ -1147,7 +1151,7 @@ uint8_t syn6288_get_synthesis_volume(syn6288_handle_t *handle, uint8_t *volume)
  */
 uint8_t syn6288_set_background_volume(syn6288_handle_t *handle, uint8_t volume)
 {
-    volatile char cmd[8];
+    char cmd[8];
     
     if (volume > 16)                                              /* check volume */
     {
@@ -1157,7 +1161,7 @@ uint8_t syn6288_set_background_volume(syn6288_handle_t *handle, uint8_t volume)
     }
     
     memset((char *)cmd, 0, sizeof(char)*8);                       /* memory set 0 */
-    snprintf((char *)cmd, 8, "m[%d]", volume);                    /* set command */
+    (void)snprintf((char *)cmd, 8, "m[%d]", (int16_t)volume);     /* set command */
     handle->background_volume = volume;                           /* save colume */
 
     return syn6288_set_command(handle, (char *)cmd);              /* write command */
@@ -1202,7 +1206,7 @@ uint8_t syn6288_get_background_volume(syn6288_handle_t *handle, uint8_t *volume)
  */
 uint8_t syn6288_set_synthesis_speed(syn6288_handle_t *handle, uint8_t speed)
 {
-    volatile char cmd[8];
+    char cmd[8];
     
     if (speed > 5)                                                  /* check speed */
     {
@@ -1212,7 +1216,7 @@ uint8_t syn6288_set_synthesis_speed(syn6288_handle_t *handle, uint8_t speed)
     }
     
     memset((char *)cmd, 0, sizeof(char)*8);                         /* memory set 0 */
-    snprintf((char *)cmd, 8, "t[%d]", speed);                       /* set command */
+    (void)snprintf((char *)cmd, 8, "t[%d]", (int16_t)speed);        /* set command */
     handle->speed = speed;                                          /* save speed */
 
     return syn6288_set_command(handle, (char *)cmd);                /* write command */
@@ -1257,11 +1261,11 @@ uint8_t syn6288_get_synthesis_speed(syn6288_handle_t *handle, uint8_t *speed)
  */
 uint8_t syn6288_set_command(syn6288_handle_t *handle, char *command)
 {
-    volatile uint8_t res;
-    volatile uint16_t l;
-    volatile uint8_t len, temp;
-    volatile uint8_t i;
-    volatile uint8_t xor_cal = 0;
+    uint8_t res;
+    uint16_t l;
+    uint8_t len, temp;
+    uint8_t i;
+    uint8_t xor_cal = 0;
     
     if (handle == NULL)                                                   /* check handle */
     {
@@ -1272,7 +1276,7 @@ uint8_t syn6288_set_command(syn6288_handle_t *handle, char *command)
         return 3;                                                         /* return error */
     }
     
-    len = strlen(command);                                                /* get length of command */
+    len = (uint8_t)strlen(command);                                       /* get length of command */
     if (len > 200)                                                        /* check result */
     {
         handle->debug_print("syn6288: command is too long.\n");           /* command is too long */
@@ -1280,7 +1284,7 @@ uint8_t syn6288_set_command(syn6288_handle_t *handle, char *command)
         return 1;                                                         /* return error */
     }
     handle->buf[0] = 0xFD;                                                /* frame header */
-    handle->buf[1] = (len + 3) / 256;                                     /* length msb */
+    handle->buf[1] = (uint8_t)((len + 3) / 256);                          /* length msb */
     handle->buf[2] = (len + 3) % 256;                                     /* length lsb */
     handle->buf[3] = 0x01;                                                /* command */
     handle->buf[4] = 0x00;                                                /* command param */
@@ -1291,14 +1295,14 @@ uint8_t syn6288_set_command(syn6288_handle_t *handle, char *command)
     }
     handle->buf[len + 5] = xor_cal;                                       /* set xor */
     res = handle->uart_flush();                                           /* uart flush */ 
-    if (res)                                                              /* check result */
+    if (res != 0)                                                         /* check result */
     {
         handle->debug_print("syn6288: uart flush failed.\n");             /* uart flush failed */
        
         return 1;                                                         /* return error */
     }
     res = handle->uart_write((uint8_t *)handle->buf, len+6);              /* uart write */
-    if (res)                                                              /* check result */
+    if (res != 0)                                                         /* check result */
     {
         handle->debug_print("syn6288: uart write failed.\n");             /* uart write failed */
        

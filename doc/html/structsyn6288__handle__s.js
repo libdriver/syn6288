@@ -2,7 +2,7 @@ var structsyn6288__handle__s =
 [
     [ "background_volume", "structsyn6288__handle__s.html#a9daf8d480c312915d6bc140daf182170", null ],
     [ "buf", "structsyn6288__handle__s.html#a210548e128eebd5bcd2ffb465d8d1cf5", null ],
-    [ "debug_print", "structsyn6288__handle__s.html#a75f9f50c23e87e9407f9ec4e34bb42f2", null ],
+    [ "debug_print", "structsyn6288__handle__s.html#a769d5b3a6c14790a0e126e8fe70b384b", null ],
     [ "delay_ms", "structsyn6288__handle__s.html#a406c9433252b7366de417b7a60915c81", null ],
     [ "inited", "structsyn6288__handle__s.html#a19bedf28d2b9748f6a62d9ae93f4e68f", null ],
     [ "mode", "structsyn6288__handle__s.html#a37e90f5e3bd99fac2021fb3a326607d4", null ],

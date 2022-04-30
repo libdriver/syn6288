@@ -35,8 +35,8 @@
  * </table>
  */
 
-#ifndef _DRIVER_SYN6288_ADVANCE_H_
-#define _DRIVER_SYN6288_ADVANCE_H_
+#ifndef DRIVER_SYN6288_ADVANCE_H
+#define DRIVER_SYN6288_ADVANCE_H
 
 #include "driver_syn6288_interface.h"
 
@@ -52,7 +52,9 @@ extern "C"{
 /**
  * @brief syn6288 advance send command configure
  */
-#define SYN6288_ADVANCE_SEND_CONFIG 0
+#ifndef SYN6288_ADVANCE_SEND_CONFIG
+    #define SYN6288_ADVANCE_SEND_CONFIG 0        /**< don't send */
+#endif
 
 /**
  * @brief syn6288 advance example default definition

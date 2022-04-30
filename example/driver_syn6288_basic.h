@@ -35,8 +35,8 @@
  * </table>
  */
 
-#ifndef _DRIVER_SYN6288_BASIC_H_
-#define _DRIVER_SYN6288_BASIC_H_
+#ifndef DRIVER_SYN6288_BASIC_H
+#define DRIVER_SYN6288_BASIC_H
 
 #include "driver_syn6288_interface.h"
 
@@ -54,7 +54,9 @@ extern "C"{
 /**
  * @brief syn6288 basic send command configure
  */
-#define SYN6288_BASIC_SEND_CONFIG 0        /**< don't send */
+#ifndef SYN6288_BASIC_SEND_CONFIG
+    #define SYN6288_BASIC_SEND_CONFIG 0        /**< don't send */
+#endif
 
 /**
  * @brief syn6288 basic example default definition

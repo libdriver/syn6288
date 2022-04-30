@@ -1,4 +1,4 @@
-[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md)
+[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md) | [日本語](/README_ja.md) | [Deutsch](/README_de.md) | [한국어](/README_ko.md)
 
 <div align=center>
 <img src="/doc/image/logo.png"/>
@@ -6,11 +6,11 @@
 
 ## LibDriver SYN6288
 
-[![API](https://img.shields.io/badge/api-reference-blue)](https://www.libdriver.com/docs/syn6288/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
+[![MISRA](https://img.shields.io/badge/misra-compliant-brightgreen.svg)](/misra/README.md) [![API](https://img.shields.io/badge/api-reference-blue.svg)](https://www.libdriver.com/docs/syn6288/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
 
 SYN6288 Chinese speech synthesis chip is a middle and high-end speech synthesis chip with higher cost performance and more natural effect launched by Beijing Yuyintianxia Technology Co., Ltd. in early 2010. SYN6288 receives the text to be synthesized through the asynchronous serial port to realize the text to sound (TTS) conversion. The latest SYN6288 speech synthesis chip inherits the excellent features of OSYNO6188 : the smallest SSOP28L chip package, simple hardware interface and high cost performance; In addition, SYN6288 text recognition is more intelligent, speech synthesis is more natural, and speech synthesis effect and intelligent recognition effect are greatly improved. It is a speech synthesis chip for high-end applications.
 
-LibDriver SYN6288 is the full function driver of SYN6288 launched by LibDriver.It provides text synthesis, music synthesis, alarm sound synthesis and other functions.
+LibDriver SYN6288 is the full function driver of SYN6288 launched by LibDriver.It provides text synthesis, music synthesis, alarm sound synthesis and other functions. LibDriver is MISRA compliant.
 
 ### Table of Contents
 
@@ -54,7 +54,7 @@ Add /src, /interface and /example to your project.
 uint8_t res;
 
 res = syn6288_basic_init();
-if (res)
+if (res != 0)
 {
     return 1;
 }
@@ -62,17 +62,17 @@ if (res)
 ...
 
 res = syn6288_basic_synthesis("你好");
-if (res)
+if (res != 0)
 {
-    syn6288_basic_deinit();
+    (void)syn6288_basic_deinit();
 
     return 1;
 }
-syn6288_basic_sync();
+(void)syn6288_basic_sync();
 
 ...
 
-syn6288_basic_deinit();
+(void)syn6288_basic_deinit();
 
 return 0;
 ```
@@ -83,7 +83,7 @@ return 0;
 uint8_t res;
 
 res = syn6288_advance_init();
-if (res)
+if (res != 0)
 {
     return 1;
 }
@@ -91,50 +91,50 @@ if (res)
 ...
 
 res = syn6288_advance_synthesis("你好");
-if (res)
+if (res != 0)
 {
-    syn6288_advance_deinit();
+    (void)syn6288_advance_deinit();
 
     return 1;
 }
-syn6288_advance_sync();
+(void)syn6288_advance_sync();
 
 ...
 
 res = syn6288_advance_sound(SYN6288_SOUND_A);
-if (res)
+if (res != 0)
 {
-    syn6288_advance_deinit();
+    (void)syn6288_advance_deinit();
 
     return 1;
 }
-syn6288_advance_sync()    
+(void)syn6288_advance_sync()    
 
 ...
     
 res = syn6288_advance_message(SYN6288_MESSAGE_A);
-if (res)
+if (res != 0)
 {
-    syn6288_advance_deinit();
+    (void)syn6288_advance_deinit();
 
     return 1;
 }
-syn6288_advance_sync();
+(void)syn6288_advance_sync();
 
 ...
 
 res = syn6288_advance_ring(SYN6288_RING_A);
-if (res)
+if (res != 0)
 {
-    syn6288_advance_deinit();
+    (void)syn6288_advance_deinit();
 
     return 1;
 }
-syn6288_advance_sync();
+(void)syn6288_advance_sync();
 
 ...
     
-syn6288_advance_deinit();
+(void)syn6288_advance_deinit();
 
 return 0;
 ```
