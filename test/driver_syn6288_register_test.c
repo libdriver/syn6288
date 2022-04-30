@@ -48,9 +48,10 @@ static syn6288_handle_t gs_handle;        /**< syn6288 handle */
  */
 uint8_t syn6288_register_test(void)
 {
-    volatile uint8_t res;
-    volatile uint8_t volume;
-    volatile uint8_t speed;
+    uint8_t res;
+    uint8_t volume;
+    uint8_t speed;
+    char s[32];
     syn6288_baud_rate_t rate;
     syn6288_mode_t mode;
     syn6288_info_t info;
@@ -68,7 +69,7 @@ uint8_t syn6288_register_test(void)
     
     /* get syn6288 information */
     res = syn6288_info(&info);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: get info failed.\n");
        
@@ -90,7 +91,7 @@ uint8_t syn6288_register_test(void)
     
     /* syn6288 init */
     res = syn6288_init(&gs_handle);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: init failed.\n");
 
@@ -103,10 +104,10 @@ uint8_t syn6288_register_test(void)
     /* syn6288_set_baud_rate/syn6288_get_baud_rate test */
     syn6288_interface_debug_print("syn6288: syn6288_set_baud_rate/syn6288_get_baud_rate test.\n");
     res = syn6288_set_baud_rate(&gs_handle, SYN6288_BAUD_RATE_9600_BPS);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set baud rate failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -114,10 +115,10 @@ uint8_t syn6288_register_test(void)
     /* set 9600 bps */
     syn6288_interface_debug_print("syn6288: set 9600 bps.\n");
     res = syn6288_get_baud_rate(&gs_handle, &rate);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: get baud rate failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -126,19 +127,19 @@ uint8_t syn6288_register_test(void)
     /* syn6288_set_mode/syn6288_get_mode test */
     syn6288_interface_debug_print("syn6288: syn6288_set_mode/syn6288_get_mode test.\n");
     res = syn6288_set_mode(&gs_handle, SYN6288_MODE_BACKGROUND_15);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set mode failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
     syn6288_interface_debug_print("syn6288: set background_15 mode.\n");
     res = syn6288_get_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: get mode failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -149,19 +150,19 @@ uint8_t syn6288_register_test(void)
     
     /* set GB2312 */
     res = syn6288_set_text_type(&gs_handle, SYN6288_TYPE_GB2312);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set text type failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
     syn6288_interface_debug_print("syn6288: set gb2312 text type.\n");
     res = syn6288_get_text_type(&gs_handle, &type);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: get text type failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -169,19 +170,19 @@ uint8_t syn6288_register_test(void)
     
     /* set GBK */
     res = syn6288_set_text_type(&gs_handle, SYN6288_TYPE_GBK);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set text type failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
     syn6288_interface_debug_print("syn6288: set gbk text type.\n");
     res = syn6288_get_text_type(&gs_handle, &type);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: get text type failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -189,19 +190,19 @@ uint8_t syn6288_register_test(void)
     
     /* set BIG5 */
     res = syn6288_set_text_type(&gs_handle, SYN6288_TYPE_BIG5);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set text type failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
     syn6288_interface_debug_print("syn6288: set big5 text type.\n");
     res = syn6288_get_text_type(&gs_handle, &type);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: get text type failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -209,19 +210,19 @@ uint8_t syn6288_register_test(void)
     
     /* set UNICODE */
     res = syn6288_set_text_type(&gs_handle, SYN6288_TYPE_UNICODE);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set text type failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
     syn6288_interface_debug_print("syn6288: set unicode text type.\n");
     res = syn6288_get_text_type(&gs_handle, &type);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: get text type failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -230,19 +231,19 @@ uint8_t syn6288_register_test(void)
     /* syn6288_set_synthesis_volume/syn6288_get_synthesis_volume test */
     syn6288_interface_debug_print("syn6288: syn6288_set_synthesis_volume/syn6288_get_synthesis_volume test.\n");
     res = syn6288_set_synthesis_volume(&gs_handle, 6);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set synthesis volume failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
     syn6288_interface_debug_print("syn6288: set synthesis volume 6.\n");
     res = syn6288_get_synthesis_volume(&gs_handle, (uint8_t *)&volume);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: get synthesis volume failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -251,19 +252,19 @@ uint8_t syn6288_register_test(void)
     /* syn6288_set_background_volume/syn6288_get_background_volume test */
     syn6288_interface_debug_print("syn6288: syn6288_set_background_volume/syn6288_get_background_volume test.\n");
     res = syn6288_set_background_volume(&gs_handle, 8);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set background volume failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
     syn6288_interface_debug_print("syn6288: set background volume 8.\n");
     res = syn6288_get_background_volume(&gs_handle, (uint8_t *)&volume);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: get background volume failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -272,19 +273,19 @@ uint8_t syn6288_register_test(void)
     /* syn6288_set_synthesis_speed/syn6288_get_synthesis_speed test */
     syn6288_interface_debug_print("syn6288: syn6288_set_synthesis_speed/syn6288_get_synthesis_speed test.\n");
     res = syn6288_set_synthesis_speed(&gs_handle, 3);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set synthesis speed failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
     syn6288_interface_debug_print("syn6288: set synthesis speed 3.\n");
     res = syn6288_get_synthesis_speed(&gs_handle, (uint8_t *)&speed);
-    if (res)
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: get synthesis speed failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -292,11 +293,13 @@ uint8_t syn6288_register_test(void)
     
     /* syn6288_set_command test */
     syn6288_interface_debug_print("syn6288: syn6288_set_command test.\n");
-    res = syn6288_set_command(&gs_handle, "[y1]");
-    if (res)
+    memset(s, 0, sizeof(char) * 32);
+    strncpy(s, "[y1]", 32);
+    res = syn6288_set_command(&gs_handle, s);
+    if (res != 0)
     {
         syn6288_interface_debug_print("syn6288: set command failed.\n");
-        syn6288_deinit(&gs_handle);
+        (void)syn6288_deinit(&gs_handle);
         
         return 1;
     }
@@ -304,7 +307,7 @@ uint8_t syn6288_register_test(void)
     
     /* finish register test */
     syn6288_interface_debug_print("syn6288: finish register test.\n");
-    syn6288_deinit(&gs_handle);
+    (void)syn6288_deinit(&gs_handle);
 
     return 0;
 }

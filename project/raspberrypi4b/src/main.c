@@ -39,7 +39,6 @@
 #include "driver_syn6288_advance.h"
 #include "driver_syn6288_register_test.h"
 #include "driver_syn6288_synthesis_test.h"
-#include "uart.h"
 #include <ctype.h>
 
 /**
@@ -123,7 +122,7 @@ uint8_t syn6288(uint8_t argc, char **argv)
             if (strcmp("reg", argv[2]) == 0)
             {
                 /* run reg test */
-                if (syn6288_register_test())
+                if (syn6288_register_test() != 0)
                 {
                     return 1;
                 }
@@ -136,7 +135,7 @@ uint8_t syn6288(uint8_t argc, char **argv)
             if (strcmp("syn", argv[2]) == 0)
             {
                 /* run syn test */
-                if (syn6288_synthesis_test())
+                if (syn6288_synthesis_test() != 0)
                 {
                     return 1;
                 }
@@ -165,24 +164,24 @@ uint8_t syn6288(uint8_t argc, char **argv)
             /* synthesis function */
             if (strcmp("syn", argv[2]) == 0)
             {
-                volatile uint8_t res;
+                uint8_t res;
                 
                 res = syn6288_basic_init();
-                if (res)
+                if (res != 0)
                 {
                     return 1;
                 }
                 syn6288_interface_delay_ms(500);
                 syn6288_interface_debug_print("syn6288: synthesis %s.\n", argv[3]);
                 res = syn6288_basic_synthesis(argv[3]);
-                if (res)
+                if (res != 0)
                 {
-                    syn6288_basic_deinit();
+                    (void)syn6288_basic_deinit();
                     
                     return 1;
                 }
-                syn6288_basic_sync();
-                syn6288_basic_deinit();
+                (void)syn6288_basic_sync();
+                (void)syn6288_basic_deinit();
                 
                 return 0;
             }
@@ -208,30 +207,30 @@ uint8_t syn6288(uint8_t argc, char **argv)
             {
                 if (strcmp("syn", argv[3]) == 0)
                 {
-                    volatile uint8_t res;
+                    uint8_t res;
                     
                     res = syn6288_advance_init();
-                    if (res)
+                    if (res != 0)
                     {
                         return 1;
                     }
                     syn6288_interface_delay_ms(500);
                     syn6288_interface_debug_print("syn6288: synthesis %s.\n", argv[4]);
                     res = syn6288_advance_synthesis(argv[4]);
-                    if (res)
+                    if (res != 0)
                     {
-                        syn6288_advance_deinit();
+                        (void)syn6288_advance_deinit();
                         
                         return 1;
                     }
-                    syn6288_advance_sync();
-                    syn6288_advance_deinit();
+                    (void)syn6288_advance_sync();
+                    (void)syn6288_advance_deinit();
                     
                     return 0;
                 }
                 else if (strcmp("sound", argv[3]) == 0)
                 {
-                    volatile uint8_t res;
+                    uint8_t res;
                     
                     if ((argv[4][0]<'A') || (argv[4][0]>'Z'))
                     {
@@ -240,27 +239,27 @@ uint8_t syn6288(uint8_t argc, char **argv)
                         return 5;
                     }
                     res = syn6288_advance_init();
-                    if (res)
+                    if (res != 0)
                     {
                         return 1;
                     }
                     syn6288_interface_delay_ms(500);
                     syn6288_interface_debug_print("syn6288: synthesis sound %c.\n", toupper(argv[4][0]));
                     res = syn6288_advance_sound((syn6288_sound_t)(toupper(argv[4][0])));
-                    if (res)
+                    if (res != 0)
                     {
-                        syn6288_advance_deinit();
+                        (void)syn6288_advance_deinit();
                         
                         return 1;
                     }
-                    syn6288_advance_sync();
-                    syn6288_advance_deinit();
+                    (void)syn6288_advance_sync();
+                    (void)syn6288_advance_deinit();
                     
                     return 0;
                 }
                 else if (strcmp("message", argv[3]) == 0)
                 {
-                    volatile uint8_t res;
+                    uint8_t res;
                     
                     if ((argv[4][0]<'A') || (argv[4][0]>'H'))
                     {
@@ -269,27 +268,27 @@ uint8_t syn6288(uint8_t argc, char **argv)
                         return 5;
                     }
                     res = syn6288_advance_init();
-                    if (res)
+                    if (res != 0)
                     {
                         return 1;
                     }
                     syn6288_interface_delay_ms(500);
                     syn6288_interface_debug_print("syn6288: synthesis message %c.\n", toupper(argv[4][0]));
                     res = syn6288_advance_message((syn6288_message_t)(toupper(argv[4][0])));
-                    if (res)
+                    if (res != 0)
                     {
-                        syn6288_advance_deinit();
+                        (void)syn6288_advance_deinit();
                         
                         return 1;
                     }
-                    syn6288_advance_sync();
-                    syn6288_advance_deinit();
+                    (void)syn6288_advance_sync();
+                    (void)syn6288_advance_deinit();
                     
                     return 0;
                 }
                 else if (strcmp("ring", argv[3]) == 0)
                 {
-                    volatile uint8_t res;
+                    uint8_t res;
                     
                     if ((argv[4][0]<'A') || (argv[4][0]>'O'))
                     {
@@ -298,21 +297,21 @@ uint8_t syn6288(uint8_t argc, char **argv)
                         return 5;
                     }
                     res = syn6288_advance_init();
-                    if (res)
+                    if (res != 0)
                     {
                         return 1;
                     }
                     syn6288_interface_delay_ms(500);
                     syn6288_interface_debug_print("syn6288: synthesis ring %c.\n", toupper(argv[4][0]));
                     res = syn6288_advance_ring((syn6288_ring_t)(toupper(argv[4][0])));
-                    if (res)
+                    if (res != 0)
                     {
-                        syn6288_advance_deinit();
+                        (void)syn6288_advance_deinit();
                         
                         return 1;
                     }
-                    syn6288_advance_sync();
-                    syn6288_advance_deinit();
+                    (void)syn6288_advance_sync();
+                    (void)syn6288_advance_deinit();
                     
                     return 0;
                 }
