@@ -28,15 +28,15 @@ LibDriver SYN6288 ist der voll funktionsfähige Treiber von SYN6288, der von Lib
 
 /src enthält LibDriver SYN6288-Quelldateien.
 
-/interface enthält die plattformunabhängige Vorlage LibDriver SYN6288 UART。
+/interface enthält die plattformunabhängige Vorlage LibDriver SYN6288 UART.
 
-/test enthält den Testcode des LibDriver SYN6288-Treibers und dieser Code kann die erforderliche Funktion des Chips einfach testen。
+/test enthält den Testcode des LibDriver SYN6288-Treibers und dieser Code kann die erforderliche Funktion des Chips einfach testen.
 
 /example enthält LibDriver SYN6288-Beispielcode.
 
 /doc enthält das LibDriver SYN6288-Offlinedokument.
 
-/Datenblatt enthält SYN6288-Datenblatt。
+/Datenblatt enthält SYN6288-Datenblatt.
 
 /project enthält den allgemeinen Beispielcode für Linux- und MCU-Entwicklungsboards. Alle Projekte verwenden das Shell-Skript, um den Treiber zu debuggen, und die detaillierten Anweisungen finden Sie in der README.md jedes Projekts.
 
