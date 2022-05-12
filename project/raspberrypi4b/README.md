@@ -63,8 +63,8 @@ syn6288: min temperature is -35.0C.
 ```shell
 ./syn6288 -p
 
-syn6288: TX connected to GPIOA PIN3.
-syn6288: RX connected to GPIOA PIN2.
+syn6288: TX connected to GPIO14(BCM).
+syn6288: RX connected to GPIO15(BCM).
 ```
 
 ```shell
