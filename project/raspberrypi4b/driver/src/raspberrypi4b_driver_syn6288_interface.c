@@ -42,7 +42,7 @@
 /**
  * @brief uart device name definition
  */
-#define UART_DEVICE_NAME "/dev/ttyAMA0"        /**< uart device name */
+#define UART_DEVICE_NAME "/dev/ttyS0"        /**< uart device name */
 
 /**
  * @brief uart device hanble definition
