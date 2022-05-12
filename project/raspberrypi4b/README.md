@@ -14,6 +14,12 @@ uart pin: TX/RX GPIO14/GPIO15.
 make
 ```
 
+#### 2.2 configuration
+
+Enable serial port.
+
+Disable serial console.
+
 ### 3. syn6288
 
 #### 3.1 command Instruction
