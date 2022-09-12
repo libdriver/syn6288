@@ -51,6 +51,8 @@ Fügen Sie /src, /interface und /example zu Ihrem Projekt hinzu.
 #### example basic
 
 ```C
+#include "driver_syn6288_basic.h"
+
 uint8_t res;
 
 res = syn6288_basic_init();
@@ -80,6 +82,8 @@ return 0;
 #### example advance
 
 ```c
+#include "driver_syn6288_advance.h"
+
 uint8_t res;
 
 res = syn6288_advance_init();
