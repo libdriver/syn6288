@@ -1,28 +1,84 @@
-### 1. chip
+### 1. Chip
 
-#### 1.1 chip info
+#### 1.1 Chip Info
 
-chip name : Raspberry Pi 4B
+chip name : Raspberry Pi 4B.
 
 uart pin: TX/RX GPIO14/GPIO15.
 
-### 2. install
+### 2. Install
 
-#### 2.1 install info
+#### 2.1 Dependencies
+
+Install the necessary dependencies.
 
 ```shell
-make
+sudo apt-get install libgpiod-dev pkg-config cmake -y
 ```
-
-#### 2.2 configuration
+#### 2.2 Configuration
 
 Enable serial port.
 
 Disable serial console.
 
-### 3. syn6288
+#### 2.3 Makefile
 
-#### 3.1 command Instruction
+Build the project.
+
+```shell
+make
+```
+
+Install the project and this is optional.
+
+```shell
+sudo make install
+```
+
+Uninstall the project and this is optional.
+
+```shell
+sudo make uninstall
+```
+
+#### 2.4 CMake
+
+Build the project.
+
+```shell
+mkdir build && cd build 
+cmake .. 
+make
+```
+
+Install the project and this is optional.
+
+```shell
+sudo make install
+```
+
+Uninstall the project and this is optional.
+
+```shell
+sudo make uninstall
+```
+
+Test the project and this is optional.
+
+```shell
+make test
+```
+
+Find the compiled library in CMake. 
+
+```cmake
+find_package(syn6288 REQUIRED)
+```
+
+
+### 3. SYN6288
+
+#### 3.1 Command Instruction
 
 ​          syn6288 is a basic command which can test all syn6288 driver function:
 
@@ -50,7 +106,7 @@ Disable serial console.
 
 ​           -c advance -ring <ringtype>        run syn6288 advance synthesis ring function. ringtype can be "A" - "O".
 
-#### 3.2 command example
+#### 3.2 Command Example
 
 ```shell
 ./syn6288 -i

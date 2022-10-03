@@ -51,6 +51,8 @@ LibDriver SYN6288は、LibDriverによって起動されたSYN6288の全機能�
 #### example basic
 
 ```C
+#include "driver_syn6288_basic.h"
+
 uint8_t res;
 
 res = syn6288_basic_init();
@@ -80,6 +82,8 @@ return 0;
 #### example advance
 
 ```c
+#include "driver_syn6288_advance.h"
+
 uint8_t res;
 
 res = syn6288_advance_init();

@@ -28,15 +28,15 @@ LibDriver SYN6288 is the full function driver of SYN6288 launched by LibDriver.I
 
 /src includes LibDriver SYN6288 source files.
 
-/interface includes LibDriver SYN6288 UART platform independent template。
+/interface includes LibDriver SYN6288 UART platform independent template.
 
-/test includes LibDriver SYN6288 driver test code and this code can test the chip necessary function simply。
+/test includes LibDriver SYN6288 driver test code and this code can test the chip necessary function simply.
 
 /example includes LibDriver SYN6288 sample code.
 
 /doc includes LibDriver SYN6288 offline document.
 
-/datasheet includes SYN6288 datasheet。
+/datasheet includes SYN6288 datasheet.
 
 /project includes the common Linux and MCU development board sample code. All projects use the shell script to debug the driver and the detail instruction can be found in each project's README.md.
 
@@ -51,6 +51,8 @@ Add /src, /interface and /example to your project.
 #### example basic
 
 ```C
+#include "driver_syn6288_basic.h"
+
 uint8_t res;
 
 res = syn6288_basic_init();
@@ -80,6 +82,8 @@ return 0;
 #### example advance
 
 ```C
+#include "driver_syn6288_advance.h"
+
 uint8_t res;
 
 res = syn6288_advance_init();

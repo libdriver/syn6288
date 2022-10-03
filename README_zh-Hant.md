@@ -51,6 +51,8 @@ LibDriver SYN6288 是LibDriver推出的SYN6288 的全功能驅動，該驅動提
 #### example basic
 
 ```C
+#include "driver_syn6288_basic.h"
+
 uint8_t res;
 
 res = syn6288_basic_init();
@@ -80,6 +82,8 @@ return 0;
 #### example advance
 
 ```C
+#include "driver_syn6288_advance.h"
+
 uint8_t res;
 
 res = syn6288_advance_init();
