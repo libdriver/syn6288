@@ -81,7 +81,7 @@ uint8_t syn6288_register_test(void)
         syn6288_interface_debug_print("syn6288: chip is %s.\n", info.chip_name);
         syn6288_interface_debug_print("syn6288: manufacturer is %s.\n", info.manufacturer_name);
         syn6288_interface_debug_print("syn6288: interface is %s.\n", info.interface);
-        syn6288_interface_debug_print("syn6288: driver version is %d.%d.\n", info.driver_version/1000, (info.driver_version%1000)/100);
+        syn6288_interface_debug_print("syn6288: driver version is %d.%d.\n", info.driver_version / 1000, (info.driver_version % 1000) / 100);
         syn6288_interface_debug_print("syn6288: min supply voltage is %0.1fV.\n", info.supply_voltage_min_v);
         syn6288_interface_debug_print("syn6288: max supply voltage is %0.1fV.\n", info.supply_voltage_max_v);
         syn6288_interface_debug_print("syn6288: max current is %0.2fmA.\n", info.max_current_ma);
