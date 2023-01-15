@@ -1,10 +1,10 @@
-### 1. Chip
+### 1. Board
 
-#### 1.1 Chip Info
+#### 1.1 Board Info
 
-chip name : Raspberry Pi 4B.
+Board Name: Raspberry Pi 4B.
 
-uart pin: TX/RX GPIO14/GPIO15.
+UART Pin: TX/RX GPIO14/GPIO15.
 
 ### 2. Install
 
@@ -75,36 +75,73 @@ Find the compiled library in CMake.
 find_package(syn6288 REQUIRED)
 ```
 
+#### 2.5 Command Problem
+
+Each command will sent a sleep command to the chip, but raspberry can't run wake up command, so you should power down and power on SYN6288 every time before your any new command.
 
 ### 3. SYN6288
 
 #### 3.1 Command Instruction
 
-​          syn6288 is a basic command which can test all syn6288 driver function:
+1. Show syn6288 chip and driver information.
 
-​           -i        show syn6288 chip and driver information.
+   ```shell
+   syn6288 (-i | --information)
+   ```
 
-​           -h       show syn6288 help.
+2. Show syn6288 help.
 
-​           -p       show syn6288 pin connections of the current board.
+   ```shell
+   syn6288 (-h | --help)
+   ```
 
-​           -t (reg | syn)
+3. Show syn6288 pin connections of the current board.
 
-​           -t reg        run syn6288 register test.
+   ```shell
+   syn6288 (-p | --port)
+   ```
 
-​           -t syn        run syn6288 synthesis test.
+4. Run syn6288 register test.
 
-​           -c (syn <text>| advance (-syn <text>| -sound <soundtype>| -message <messagetype>|  -ring <ringtype>))
+   ```shell
+   syn6288 (-t reg | --test=reg)
+   ```
 
-​           -c syn <text>        run syn6288 synthesis text function. text format is gb2312.
+5. Run syn6288 synthesis test.
 
-​           -c advance -syn <text>        run syn6288 advance synthesis text function. text format is gb2312.
+   ```shell
+   syn6288 (-t syn | --test=syn)
+   ```
 
-​           -c advance -sound <soundtype>        run syn6288 advance synthesis sound function. soundtype can be "A" - "Y".
+6. Run syn6288 synthesis text function, gb2312 format is gb2312.
 
-​           -c advance -message <messagetype>        run syn6288 advance synthesis message function. messagetype can be "A" - "H".
+   ```shell
+   syn6288 (-e syn | --example=syn) --text=<gb2312>
+   ```
 
-​           -c advance -ring <ringtype>        run syn6288 advance synthesis ring function. ringtype can be "A" - "O".
+7. Run syn6288 advance synthesis text function, gb2312 format is gb2312.
+
+   ```shell
+   syn6288 (-e advance-syn | --example=advance-syn) --text=<gb2312>
+   ```
+
+8. Run syn6288 advance synthesis sound function, type can be "A" - "Y".
+
+   ```shell
+   syn6288 (-e advance-sound | --example=advance-sound) --sound=<type>
+   ```
+
+9. Run syn6288 advance synthesis message function, type can be "A" - "H".
+
+   ```shell
+   syn6288 (-e advance-msg | --example=advance-msg) --msg=<type>
+   ```
+
+10. Run syn6288 advance synthesis ring function, type can be "A" - "O".
+
+    ```shell
+    syn6288 (-e advance-ring | --example=advance-ring) --ring=<type>
+    ```
 
 #### 3.2 Command Example
 
@@ -113,7 +150,7 @@ find_package(syn6288 REQUIRED)
 
 syn6288: chip is YuToneWorld SYN6288.
 syn6288: manufacturer is YuToneWorld.
-syn6288: interface is UART.
+syn6288: interface is IIC.
 syn6288: driver version is 2.0.
 syn6288: min supply voltage is 2.4V.
 syn6288: max supply voltage is 5.1V.
@@ -134,7 +171,7 @@ syn6288: RX connected to GPIO15(BCM).
 
 syn6288: chip is YuToneWorld SYN6288.
 syn6288: manufacturer is YuToneWorld.
-syn6288: interface is UART.
+syn6288: interface is IIC.
 syn6288: driver version is 2.0.
 syn6288: min supply voltage is 2.4V.
 syn6288: max supply voltage is 5.1V.
@@ -176,7 +213,7 @@ syn6288: finish register test.
 
 syn6288: chip is YuToneWorld SYN6288.
 syn6288: manufacturer is YuToneWorld.
-syn6288: interface is UART.
+syn6288: interface is IIC.
 syn6288: driver version is 2.0.
 syn6288: min supply voltage is 2.4V.
 syn6288: max supply voltage is 5.1V.
@@ -209,57 +246,62 @@ syn6288: finish synthesis test.
 ```
 
 ```shell
-./syn6288 -c syn 你好
+./syn6288 -e syn --text=Hello
 
-syn6288: synthesis 你好.
+syn6288: synthesis Hello.
 ```
 
 ```shell
-./syn6288 -c advance syn 你好
+./syn6288 -e advance-syn --text=Hello
 
-syn6288: synthesis 你好.
+syn6288: synthesis Hello.
 ```
 
 ```shell
-./syn6288 -c advance sound A
+./syn6288 -e advance-sound --sound=A
 
-syn6288: synthesis sound A.
+syn6288: synthesis sound a.
 ```
 
 ```shell
-./syn6288 -c advance message A
+./syn6288 -e advance-msg --msg=A
 
-syn6288: synthesis message A.
+syn6288: synthesis message a.
 ```
 
 ```shell
-./syn6288 -c advance ring A
+./syn6288 -e advance-ring --ring=A
 
-syn6288: synthesis ring A.
+syn6288: synthesis ring a.
 ```
 
 ```shell
 ./syn6288 -h
 
-syn6288 -i
-	show syn6288 chip and driver information.
-syn6288 -h
-	show syn6288 help.
-syn6288 -p
-	show syn6288 pin connections of the current board.
-syn6288 -t reg
-	run syn6288 register test.
-syn6288 -t syn
-	run syn6288 synthesis test.
-syn6288 -c syn <text>
-	run syn6288 synthesis text function.text format is gb2312.
-syn6288 -c advance -syn <text>
-	run syn6288 advance synthesis text function.text format is gb2312.
-syn6288 -c advance -sound <soundtype>
-	run syn6288 advance synthesis sound function.soundtype can be "A" - "Y".
-syn6288 -c advance -message <messagetype>
-	run syn6288 advance synthesis message function.messagetype can be "A" - "H".
-syn6288 -c advance -ring <ringtype>
-	run syn6288 advance synthesis ring function.ringtype can be "A" - "O".
+Usage:
+  syn6288 (-i | --information)
+  syn6288 (-h | --help)
+  syn6288 (-p | --port)
+  syn6288 (-t reg | --test=reg)
+  syn6288 (-t syn | --test=syn)
+  syn6288 (-e syn | --example=syn) --text=<gb2312>
+  syn6288 (-e advance-syn | --example=advance-syn) --text=<gb2312>
+  syn6288 (-e advance-sound | --example=advance-sound) --sound=<type>
+  syn6288 (-e advance-msg | --example=advance-msg) --msg=<type>
+  syn6288 (-e advance-ring | --example=advance-ring) --ring=<type>
+
+Options:
+  -e <syn | advance-syn | advance-sound | advance-msg | advance-ring>, --example=<syn
+     | advance-syn | advance-sound | advance-msg | advance-ring>
+                          Run the driver example.
+  -h, --help              Show the help.
+  -i, --information       Show the chip information.
+      --msg=<type>        Set the synthesis message and type can be "A" - "H".
+  -p, --port              Display the pin connections of the current board.
+      --ring=<type>       Set the synthesis ring and type can be "A" - "O".
+      --sound=<type>      Set the synthesis sound and type can be "A" - "Y".
+  -t <reg | syn>, --test=<reg | syn>
+                          Run the driver test.
+      --text=<gb2312>     Set the synthesis text and it's format is GB2312.
 ```
 
