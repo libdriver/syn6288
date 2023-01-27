@@ -80,7 +80,7 @@ uint8_t syn6288(uint8_t argc, char **argv)
         {"text", required_argument, NULL, 4},
         {NULL, 0, NULL, 0},
     };
-    char type[32] = "unknow";
+    char type[33] = "unknow";
     uint8_t sound_flag = 0;
     uint8_t msg_flag = 0;
     uint8_t ring_flag = 0;
@@ -88,7 +88,7 @@ uint8_t syn6288(uint8_t argc, char **argv)
     syn6288_sound_t sound = SYN6288_SOUND_A;
     syn6288_message_t msg = SYN6288_MESSAGE_A;
     syn6288_ring_t ring = SYN6288_RING_A;
-    char text[128] = {0};
+    char text[129] = {0};
     
     /* if no params */
     if (argc == 1)
@@ -113,7 +113,7 @@ uint8_t syn6288(uint8_t argc, char **argv)
             case 'h' :
             {
                 /* set the type */
-                memset(type, 0, sizeof(char) * 32);
+                memset(type, 0, sizeof(char) * 33);
                 snprintf(type, 32, "h");
                 
                 break;
@@ -123,7 +123,7 @@ uint8_t syn6288(uint8_t argc, char **argv)
             case 'i' :
             {
                 /* set the type */
-                memset(type, 0, sizeof(char) * 32);
+                memset(type, 0, sizeof(char) * 33);
                 snprintf(type, 32, "i");
                 
                 break;
@@ -133,7 +133,7 @@ uint8_t syn6288(uint8_t argc, char **argv)
             case 'p' :
             {
                 /* set the type */
-                memset(type, 0, sizeof(char) * 32);
+                memset(type, 0, sizeof(char) * 33);
                 snprintf(type, 32, "p");
                 
                 break;
@@ -143,7 +143,7 @@ uint8_t syn6288(uint8_t argc, char **argv)
             case 'e' :
             {
                 /* set the type */
-                memset(type, 0, sizeof(char) * 32);
+                memset(type, 0, sizeof(char) * 33);
                 snprintf(type, 32, "e_%s", optarg);
                 
                 break;
@@ -153,7 +153,7 @@ uint8_t syn6288(uint8_t argc, char **argv)
             case 't' :
             {
                 /* set the type */
-                memset(type, 0, sizeof(char) * 32);
+                memset(type, 0, sizeof(char) * 33);
                 snprintf(type, 32, "t_%s", optarg);
                 
                 break;
@@ -193,8 +193,8 @@ uint8_t syn6288(uint8_t argc, char **argv)
             case 4 :
             {
                 /* set the test */
-                memset(text, 0, sizeof(char) * 128);
-                strcpy(text, optarg);
+                memset(text, 0, sizeof(char) * 129);
+                strncpy(text, optarg, 128);
                 text_flag = 1;
                 
                 break;
