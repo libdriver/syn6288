@@ -40,6 +40,8 @@ LibDriver SYN6288 is the full function driver of SYN6288 launched by LibDriver.I
 
 /project includes the common Linux and MCU development board sample code. All projects use the shell script to debug the driver and the detail instruction can be found in each project's README.md.
 
+/misra includes the LibDriver MISRA code scanning results.
+
 ### Install
 
 Reference /interface UART platform independent template and finish your platform UART driver.
