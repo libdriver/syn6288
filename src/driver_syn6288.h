@@ -161,21 +161,21 @@ typedef enum
 typedef enum
 {
     SYN6288_MODE_COMMON        = (0x00),           /**< common */
-    SYN6288_MODE_BACKGROUND_1  = (1 << 3),         /**< backgroud 1 */
-    SYN6288_MODE_BACKGROUND_2  = (2 << 3),         /**< backgroud 2 */
-    SYN6288_MODE_BACKGROUND_3  = (3 << 3),         /**< backgroud 3 */
-    SYN6288_MODE_BACKGROUND_4  = (4 << 3),         /**< backgroud 4 */
-    SYN6288_MODE_BACKGROUND_5  = (5 << 3),         /**< backgroud 5 */
-    SYN6288_MODE_BACKGROUND_6  = (6 << 3),         /**< backgroud 6 */
-    SYN6288_MODE_BACKGROUND_7  = (7 << 3),         /**< backgroud 7 */
-    SYN6288_MODE_BACKGROUND_8  = (8 << 3),         /**< backgroud 8 */
-    SYN6288_MODE_BACKGROUND_9  = (9 << 3),         /**< backgroud 9 */
-    SYN6288_MODE_BACKGROUND_10 = (10 << 3),        /**< backgroud 10 */
-    SYN6288_MODE_BACKGROUND_11 = (11 << 3),        /**< backgroud 11 */
-    SYN6288_MODE_BACKGROUND_12 = (12 << 3),        /**< backgroud 12 */
-    SYN6288_MODE_BACKGROUND_13 = (13 << 3),        /**< backgroud 13 */
-    SYN6288_MODE_BACKGROUND_14 = (14 << 3),        /**< backgroud 14 */
-    SYN6288_MODE_BACKGROUND_15 = (15 << 3),        /**< backgroud 15 */
+    SYN6288_MODE_BACKGROUND_1  = (1 << 3),         /**< background 1 */
+    SYN6288_MODE_BACKGROUND_2  = (2 << 3),         /**< background 2 */
+    SYN6288_MODE_BACKGROUND_3  = (3 << 3),         /**< background 3 */
+    SYN6288_MODE_BACKGROUND_4  = (4 << 3),         /**< background 4 */
+    SYN6288_MODE_BACKGROUND_5  = (5 << 3),         /**< background 5 */
+    SYN6288_MODE_BACKGROUND_6  = (6 << 3),         /**< background 6 */
+    SYN6288_MODE_BACKGROUND_7  = (7 << 3),         /**< background 7 */
+    SYN6288_MODE_BACKGROUND_8  = (8 << 3),         /**< background 8 */
+    SYN6288_MODE_BACKGROUND_9  = (9 << 3),         /**< background 9 */
+    SYN6288_MODE_BACKGROUND_10 = (10 << 3),        /**< background 10 */
+    SYN6288_MODE_BACKGROUND_11 = (11 << 3),        /**< background 11 */
+    SYN6288_MODE_BACKGROUND_12 = (12 << 3),        /**< background 12 */
+    SYN6288_MODE_BACKGROUND_13 = (13 << 3),        /**< background 13 */
+    SYN6288_MODE_BACKGROUND_14 = (14 << 3),        /**< background 14 */
+    SYN6288_MODE_BACKGROUND_15 = (15 << 3),        /**< background 15 */
 } syn6288_mode_t;
 
 

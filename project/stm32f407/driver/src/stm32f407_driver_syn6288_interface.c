@@ -91,7 +91,7 @@ uint8_t syn6288_interface_uart_flush(void)
 }
 
 /**
- * @brief     interface uate write
+ * @brief     interface uart write
  * @param[in] *buf points to a data buffer
  * @param[in] len is the length of the data buffer
  * @return    status code
