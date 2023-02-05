@@ -71,7 +71,7 @@ uint8_t syn6288(uint8_t argc, char **argv)
         {"text", required_argument, NULL, 4},
         {NULL, 0, NULL, 0},
     };
-    char type[33] = "unknow";
+    char type[33] = "unknown";
     uint8_t sound_flag = 0;
     uint8_t msg_flag = 0;
     uint8_t ring_flag = 0;
@@ -288,7 +288,7 @@ uint8_t syn6288(uint8_t argc, char **argv)
         /* delay 500ms */
         syn6288_interface_delay_ms(500);
         
-        /* outpout */
+        /* output */
         syn6288_interface_debug_print("syn6288: synthesis %s.\n", text);
         
         /* syn */
@@ -508,7 +508,7 @@ int main(uint8_t argc, char **argv)
     }
     else
     {
-        syn6288_interface_debug_print("syn6288: unknow status code.\n");
+        syn6288_interface_debug_print("syn6288: unknown status code.\n");
     }
 
     return 0;

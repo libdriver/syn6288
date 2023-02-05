@@ -1107,7 +1107,7 @@ uint8_t syn6288_set_synthesis_volume(syn6288_handle_t *handle, uint8_t volume)
     
     memset((char *)cmd, 0, sizeof(char)*8);                       /* memory set 0 */
     (void)snprintf((char *)cmd, 8, "v[%d]", (int16_t)volume);     /* set command */
-    handle->volume = volume;                                      /* save colume */
+    handle->volume = volume;                                      /* save volume */
     
     return syn6288_set_command(handle, (char *)cmd);              /* write command */
 }
@@ -1162,7 +1162,7 @@ uint8_t syn6288_set_background_volume(syn6288_handle_t *handle, uint8_t volume)
     
     memset((char *)cmd, 0, sizeof(char)*8);                       /* memory set 0 */
     (void)snprintf((char *)cmd, 8, "m[%d]", (int16_t)volume);     /* set command */
-    handle->background_volume = volume;                           /* save colume */
+    handle->background_volume = volume;                           /* save volume */
 
     return syn6288_set_command(handle, (char *)cmd);              /* write command */
 }
@@ -1352,7 +1352,7 @@ uint8_t syn6288_info(syn6288_info_t *info)
     info->max_current_ma = MAX_CURRENT;                             /* set maximum current */
     info->temperature_max = TEMPERATURE_MAX;                        /* set minimal temperature */
     info->temperature_min = TEMPERATURE_MIN;                        /* set maximum temperature */
-    info->driver_version = DRIVER_VERSION;                          /* set driver verison */
+    info->driver_version = DRIVER_VERSION;                          /* set driver version */
     
     return 0;                                                       /* success return 0 */
 }

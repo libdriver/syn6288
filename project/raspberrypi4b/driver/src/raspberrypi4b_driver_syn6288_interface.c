@@ -22,7 +22,7 @@
  * SOFTWARE. 
  *
  * @file      raspberrypi4b_driver_syn6288_interface.c
- * @brief     raspbeerypi4b driver syn6288 interface source file
+ * @brief     raspberrypi4b driver syn6288 interface source file
  * @version   2.0.0
  * @author    Shifeng Li
  * @date      2021-03-17
@@ -45,7 +45,7 @@
 #define UART_DEVICE_NAME "/dev/ttyS0"        /**< uart device name */
 
 /**
- * @brief uart device hanble definition
+ * @brief uart device handle definition
  */
 static int gs_fd;                           /**< uart handle */
 
@@ -109,7 +109,7 @@ uint8_t syn6288_interface_uart_flush(void)
 }
 
 /**
- * @brief     interface uate write
+ * @brief     interface uart write
  * @param[in] *buf points to a data buffer
  * @param[in] len is the length of the data buffer
  * @return    status code
