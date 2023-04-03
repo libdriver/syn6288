@@ -25,7 +25,7 @@
  * @brief     driver syn6288 source file
  * @version   2.0.0
  * @author    Shifeng Li
- * @date      2021-3-17
+ * @date      2021-03-17
  *
  * <h3>history</h3>
  * <table>
@@ -1346,7 +1346,7 @@ uint8_t syn6288_info(syn6288_info_t *info)
     memset(info, 0, sizeof(syn6288_info_t));                        /* initialize syn6288 info structure */
     strncpy(info->chip_name, CHIP_NAME, 32);                        /* copy chip name */
     strncpy(info->manufacturer_name, MANUFACTURER_NAME, 32);        /* copy manufacturer name */
-    strncpy(info->interface, "IIC", 8);                             /* copy interface name */
+    strncpy(info->interface, "UART", 8);                            /* copy interface name */
     info->supply_voltage_min_v = SUPPLY_VOLTAGE_MIN;                /* set minimal supply voltage */
     info->supply_voltage_max_v = SUPPLY_VOLTAGE_MAX;                /* set maximum supply voltage */
     info->max_current_ma = MAX_CURRENT;                             /* set maximum current */
