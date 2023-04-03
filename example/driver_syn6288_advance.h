@@ -25,7 +25,7 @@
  * @brief     driver syn6288 advance header file
  * @version   2.0.0
  * @author    Shifeng Li
- * @date      2021-3-17
+ * @date      2021-03-17
  *
  * <h3>history</h3>
  * <table>

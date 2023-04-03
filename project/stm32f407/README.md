@@ -107,7 +107,7 @@ syn6288 -i
 
 syn6288: chip is YuToneWorld SYN6288.
 syn6288: manufacturer is YuToneWorld.
-syn6288: interface is IIC.
+syn6288: interface is UART.
 syn6288: driver version is 2.0.
 syn6288: min supply voltage is 2.4V.
 syn6288: max supply voltage is 5.1V.
