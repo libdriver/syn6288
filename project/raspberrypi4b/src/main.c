@@ -470,8 +470,8 @@ uint8_t syn6288(uint8_t argc, char **argv)
     else if (strcmp("p", type) == 0)
     {
         /* print pin connection */
-        syn6288_interface_debug_print("syn6288: TX connected to GPIO14(BCM).\n");
-        syn6288_interface_debug_print("syn6288: RX connected to GPIO15(BCM).\n");
+        syn6288_interface_debug_print("syn6288: TX connected to GPIO15(BCM).\n");
+        syn6288_interface_debug_print("syn6288: RX connected to GPIO14(BCM).\n");
         
         return 0;
     }
