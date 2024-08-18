@@ -517,6 +517,13 @@ uint8_t syn6288_power_down(syn6288_handle_t *handle)
         return 1;                                                         /* return error */
     }
     handle->delay_ms(100);                                                /* delay 100 ms */
+    res = handle->uart_flush();                                           /* uart flush */
+    if (res != 0)                                                         /* check result */
+    {
+        handle->debug_print("syn6288: uart flush failed.\n");             /* uart flush failed */
+        
+        return 1;                                                         /* return error */
+    }
     res = handle->uart_write((uint8_t *)cmd, 5);                          /* uart write */
     if (res != 0)                                                         /* check result */
     {
