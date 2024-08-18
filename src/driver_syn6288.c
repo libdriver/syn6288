@@ -129,65 +129,24 @@ uint8_t syn6288_init(syn6288_handle_t *handle)
  */
 uint8_t syn6288_deinit(syn6288_handle_t *handle)
 {
-    uint8_t res;
-    uint16_t len;
-    uint8_t temp;
-    uint8_t cmd[5];
-    
-    if (handle == NULL)                                                   /* check handle */
+    if (handle == NULL)                                               /* check handle */
     {
-        return 2;                                                         /* return error */
+        return 2;                                                     /* return error */
     }
-    if (handle->inited != 1)                                              /* check handle initialization */
+    if (handle->inited != 1)                                          /* check handle initialization */
     {
-        return 3;                                                         /* return error */
+        return 3;                                                     /* return error */
     }
     
-    cmd[0] = 0xFD;                                                        /* frame header */
-    cmd[1] = 0x00;                                                        /* length MSB */
-    cmd[2] = 0x02;                                                        /* length LSB */
-    cmd[3] = 0x88;                                                        /* command */
-    cmd[4] = 0x77;                                                        /* xor */
-    res = handle->uart_flush();                                           /* uart flush */
-    if (res != 0)                                                         /* check result */
+    if (handle->uart_deinit() != 0)                                   /* uart deinit */
     {
-        handle->debug_print("syn6288: uart flush failed.\n");             /* uart flush failed */
+        handle->debug_print("syn6288: uart deinit failed.\n");        /* uart deinit failed */
         
-        return 1;                                                         /* return error */
-    }
-    res = handle->uart_write((uint8_t *)cmd, 5);                          /* uart write */
-    if (res != 0)                                                         /* check result */
-    {
-        handle->debug_print("syn6288: uart write failed.\n");             /* uart write failed */
-        
-        return 1;                                                         /* return error */
-    }
-    handle->delay_ms(100);                                                /* delay 100 ms */
-    len = handle->uart_read((uint8_t *)&temp, 1);                         /* uart read */
-    if (len != 1)                                                         /* check length */
-    {
-        handle->debug_print("syn6288: uart read failed.\n");              /* uart read failed */
-        
-        return 1;                                                         /* return error */
-    }
-    if (temp == 0x41)                                                     /* check return */
-    {
-        if (handle->uart_deinit() != 0)                                   /* uart deinit */
-        {
-            handle->debug_print("syn6288: uart deinit failed.\n");        /* uart deinit failed */
-            
-            return 1;                                                     /* return error */
-        }         
-        handle->inited = 0;                                               /* flag close */
-        
-        return 0;                                                         /* success return 0 */
-    }
-    else
-    {
-        handle->debug_print("syn6288: command receive failed.\n");        /* command receive failed */
-        
-        return 1;                                                         /* return error */
-    }    
+        return 1;                                                     /* return error */
+    }         
+    handle->inited = 0;                                               /* flag close */
+    
+    return 0;                                                         /* success return 0 */  
 }
 
 /**
@@ -502,21 +461,6 @@ uint8_t syn6288_power_down(syn6288_handle_t *handle)
     cmd[2] = 0x02;                                                        /* length lsb */
     cmd[3] = 0x88;                                                        /* command */
     cmd[4] = 0x77;                                                        /* xor */
-    res = handle->uart_flush();                                           /* uart flush */
-    if (res != 0)                                                         /* check result */
-    {
-        handle->debug_print("syn6288: uart flush failed.\n");             /* uart flush failed */
-        
-        return 1;                                                         /* return error */
-    }
-    res = handle->uart_write((uint8_t *)cmd, 5);                          /* uart write */
-    if (res != 0)                                                         /* check result */
-    {
-        handle->debug_print("syn6288: uart write failed.\n");             /* uart write failed */
-        
-        return 1;                                                         /* return error */
-    }
-    handle->delay_ms(100);                                                /* delay 100 ms */
     res = handle->uart_flush();                                           /* uart flush */
     if (res != 0)                                                         /* check result */
     {
