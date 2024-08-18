@@ -439,7 +439,7 @@ uint8_t syn6288_synthesis_test(void)
     res = syn6288_set_synthesis_volume(&gs_handle, 5);
     if (res != 0)
     {
-        syn6288_interface_debug_print("syn6288: set background volume failed.\n");
+        syn6288_interface_debug_print("syn6288: set synthesis volume failed.\n");
         (void)syn6288_deinit(&gs_handle);
         
         return 1;
@@ -469,7 +469,7 @@ uint8_t syn6288_synthesis_test(void)
     res = syn6288_set_synthesis_volume(&gs_handle, 16);
     if (res != 0)
     {
-        syn6288_interface_debug_print("syn6288: set background volume failed.\n");
+        syn6288_interface_debug_print("syn6288: set synthesis volume failed.\n");
         (void)syn6288_deinit(&gs_handle);
         
         return 1;
