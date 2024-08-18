@@ -1,3 +1,9 @@
+## 2.0.5 (2024-08-19)
+
+## Bug Fixes
+
+- fix power down bug
+
 ## 2.0.4 (2024-08-18)
 
 ## Bug Fixes
