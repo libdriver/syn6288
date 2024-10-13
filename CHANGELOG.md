@@ -1,3 +1,9 @@
+## 2.0.7 (2024-10-13)
+
+## Bug Fixes
+
+- fix raspberrypi4b uart bugs
+
 ## 2.0.6 (2024-08-20)
 
 ## Bug Fixes
