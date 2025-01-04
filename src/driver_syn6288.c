@@ -51,7 +51,7 @@
 
 /**
  * @brief     initialize the chip
- * @param[in] *handle points to a syn6288 handle structure
+ * @param[in] *handle pointer to a syn6288 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 uart initialization failed
@@ -119,7 +119,7 @@ uint8_t syn6288_init(syn6288_handle_t *handle)
 
 /**
  * @brief     close the chip
- * @param[in] *handle points to a syn6288 handle structure
+ * @param[in] *handle pointer to a syn6288 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 uart deinit failed
@@ -151,8 +151,8 @@ uint8_t syn6288_deinit(syn6288_handle_t *handle)
 
 /**
  * @brief      get the current status
- * @param[in]  *handle points to a syn6288 handle structure
- * @param[out] *status points to a status buffer
+ * @param[in]  *handle pointer to a syn6288 handle structure
+ * @param[out] *status pointer to a status buffer
  * @return     status code
  *             - 0 success
  *             - 1 get status failed
@@ -237,7 +237,7 @@ uint8_t syn6288_get_status(syn6288_handle_t *handle, syn6288_status_t *status)
 
 /**
  * @brief     stop the chip
- * @param[in] *handle points to a syn6288 handle structure
+ * @param[in] *handle pointer to a syn6288 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 stop failed
@@ -302,7 +302,7 @@ uint8_t syn6288_stop(syn6288_handle_t *handle)
 
 /**
  * @brief     pause the chip
- * @param[in] *handle points to a syn6288 handle structure
+ * @param[in] *handle pointer to a syn6288 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 pause failed
@@ -367,7 +367,7 @@ uint8_t syn6288_pause(syn6288_handle_t *handle)
 
 /**
  * @brief     resume the chip
- * @param[in] *handle points to a syn6288 handle structure
+ * @param[in] *handle pointer to a syn6288 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 resume failed
@@ -432,7 +432,7 @@ uint8_t syn6288_resume(syn6288_handle_t *handle)
 
 /**
  * @brief     power down the chip
- * @param[in] *handle points to a syn6288 handle structure
+ * @param[in] *handle pointer to a syn6288 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 power down failed
@@ -497,8 +497,8 @@ uint8_t syn6288_power_down(syn6288_handle_t *handle)
 
 /**
  * @brief     set the baud rate
- * @param[in] *handle points to a syn6288 handle structure
- * @param[in] rate is the baud rate
+ * @param[in] *handle pointer to a syn6288 handle structure
+ * @param[in] rate baud rate
  * @return    status code
  *            - 0 success
  *            - 1 set baud rate failed
@@ -597,8 +597,8 @@ uint8_t syn6288_set_baud_rate(syn6288_handle_t *handle, syn6288_baud_rate_t rate
 
 /**
  * @brief      get the baud rate
- * @param[in]  *handle points to a syn6288 handle structure
- * @param[out] *rate points to a baud rate buffer
+ * @param[in]  *handle pointer to a syn6288 handle structure
+ * @param[out] *rate pointer to a baud rate buffer
  * @return     status code
  *             - 0 success
  *             - 2 handle is NULL
@@ -623,8 +623,8 @@ uint8_t syn6288_get_baud_rate(syn6288_handle_t *handle, syn6288_baud_rate_t *rat
 
 /**
  * @brief     set the chip mode
- * @param[in] *handle points to a syn6288 handle structure
- * @param[in] mode is the chip mode
+ * @param[in] *handle pointer to a syn6288 handle structure
+ * @param[in] mode chip mode
  * @return    status code
  *            - 0 success
  *            - 2 handle is NULL
@@ -649,8 +649,8 @@ uint8_t syn6288_set_mode(syn6288_handle_t *handle, syn6288_mode_t mode)
 
 /**
  * @brief      get the chip mode
- * @param[in]  *handle points to a syn6288 handle structure
- * @param[out] *mode points to a chip mode buffer
+ * @param[in]  *handle pointer to a syn6288 handle structure
+ * @param[out] *mode pointer to a chip mode buffer
  * @return     status code
  *             - 0 success
  *             - 2 handle is NULL
@@ -675,8 +675,8 @@ uint8_t syn6288_get_mode(syn6288_handle_t *handle, syn6288_mode_t *mode)
 
 /**
  * @brief     set the chip text type
- * @param[in] *handle points to a syn6288 handle structure
- * @param[in] type is the chip text type
+ * @param[in] *handle pointer to a syn6288 handle structure
+ * @param[in] type chip text type
  * @return    status code
  *            - 0 success
  *            - 2 handle is NULL
@@ -701,8 +701,8 @@ uint8_t syn6288_set_text_type(syn6288_handle_t *handle, syn6288_type_t type)
 
 /**
  * @brief      get the chip text type
- * @param[in]  *handle points to a syn6288 handle structure
- * @param[out] *type points to a chip text type
+ * @param[in]  *handle pointer to a syn6288 handle structure
+ * @param[out] *type pointer to a chip text type
  * @return     status code
  *             - 0 success
  *             - 2 handle is NULL
@@ -727,8 +727,8 @@ uint8_t syn6288_get_text_type(syn6288_handle_t *handle, syn6288_type_t *type)
 
 /**
  * @brief     synthesis the sound
- * @param[in] *handle points to a syn6288 handle structure
- * @param[in] sound is the sound type
+ * @param[in] *handle pointer to a syn6288 handle structure
+ * @param[in] sound sound type
  * @return    status code
  *            - 0 success
  *            - 1 synthesis sound failed
@@ -807,8 +807,8 @@ uint8_t syn6288_synthesis_sound(syn6288_handle_t *handle, syn6288_sound_t sound)
 
 /**
  * @brief     synthesis the message
- * @param[in] *handle points to a syn6288 handle structure
- * @param[in] message is the message type
+ * @param[in] *handle pointer to a syn6288 handle structure
+ * @param[in] message message type
  * @return    status code
  *            - 0 success
  *            - 1 synthesis message failed
@@ -885,8 +885,8 @@ uint8_t syn6288_synthesis_message(syn6288_handle_t *handle, syn6288_message_t me
 
 /**
  * @brief     synthesis the ring
- * @param[in] *handle points to a syn6288 handle structure
- * @param[in] ring is the ring type
+ * @param[in] *handle pointer to a syn6288 handle structure
+ * @param[in] ring ring type
  * @return    status code
  *            - 0 success
  *            - 1 synthesis ring failed
@@ -964,8 +964,8 @@ uint8_t syn6288_synthesis_ring(syn6288_handle_t *handle, syn6288_ring_t ring)
 
 /**
  * @brief     synthesis the test
- * @param[in] *handle points to a syn6288 handle structure
- * @param[in] *text points to a test buffer
+ * @param[in] *handle pointer to a syn6288 handle structure
+ * @param[in] *text pointer to a test buffer
  * @return    status code
  *            - 0 success
  *            - 1 synthesis text failed
@@ -1044,8 +1044,8 @@ uint8_t syn6288_synthesis_text(syn6288_handle_t *handle, char *text)
 
 /**
  * @brief     set the chip synthesis volume
- * @param[in] *handle points to a syn6288 handle structure
- * @param[in] volume is the synthesis volume
+ * @param[in] *handle pointer to a syn6288 handle structure
+ * @param[in] volume synthesis volume
  * @return    status code
  *            - 0 success
  *            - 1 set synthesis volume failed
@@ -1073,8 +1073,8 @@ uint8_t syn6288_set_synthesis_volume(syn6288_handle_t *handle, uint8_t volume)
 
 /**
  * @brief      get the chip synthesis volume
- * @param[in]  *handle points to a syn6288 handle structure
- * @param[out] *volume points to a synthesis volume buffer
+ * @param[in]  *handle pointer to a syn6288 handle structure
+ * @param[out] *volume pointer to a synthesis volume buffer
  * @return     status code
  *             - 0 success
  *             - 2 handle is NULL
@@ -1099,8 +1099,8 @@ uint8_t syn6288_get_synthesis_volume(syn6288_handle_t *handle, uint8_t *volume)
 
 /**
  * @brief     set the synthesis background volume
- * @param[in] *handle points to a syn6288 handle structure
- * @param[in] volume is the background volume
+ * @param[in] *handle pointer to a syn6288 handle structure
+ * @param[in] volume background volume
  * @return    status code
  *            - 0 success
  *            - 1 set background volume failed
@@ -1128,8 +1128,8 @@ uint8_t syn6288_set_background_volume(syn6288_handle_t *handle, uint8_t volume)
 
 /**
  * @brief      get the chip synthesis background volume
- * @param[in]  *handle points to a syn6288 handle structure
- * @param[out] *volume points to a synthesis background volume buffer
+ * @param[in]  *handle pointer to a syn6288 handle structure
+ * @param[out] *volume pointer to a synthesis background volume buffer
  * @return     status code
  *             - 0 success
  *             - 2 handle is NULL
@@ -1154,8 +1154,8 @@ uint8_t syn6288_get_background_volume(syn6288_handle_t *handle, uint8_t *volume)
 
 /**
  * @brief     set the synthesis speed
- * @param[in] *handle points to a syn6288 handle structure
- * @param[in] speed is the synthesis speed
+ * @param[in] *handle pointer to a syn6288 handle structure
+ * @param[in] speed synthesis speed
  * @return    status code
  *            - 0 success
  *            - 1 set synthesis speed failed
@@ -1183,8 +1183,8 @@ uint8_t syn6288_set_synthesis_speed(syn6288_handle_t *handle, uint8_t speed)
 
 /**
  * @brief      get the synthesis speed
- * @param[in]  *handle points to a syn6288 handle structure
- * @param[out] *speed points to a synthesis speed
+ * @param[in]  *handle pointer to a syn6288 handle structure
+ * @param[out] *speed pointer to a synthesis speed
  * @return     status code
  *             - 0 success
  *             - 2 handle is NULL
@@ -1209,8 +1209,8 @@ uint8_t syn6288_get_synthesis_speed(syn6288_handle_t *handle, uint8_t *speed)
 
 /**
  * @brief     send the command to the chip
- * @param[in] *handle points to a syn6288 handle structure
- * @param[in] *command points to a command buffer
+ * @param[in] *handle pointer to a syn6288 handle structure
+ * @param[in] *command pointer to a command buffer
  * @return    status code
  *            - 0 success
  *            - 1 set command failed
@@ -1289,7 +1289,7 @@ uint8_t syn6288_set_command(syn6288_handle_t *handle, char *command)
 
 /**
  * @brief      get chip's information
- * @param[out] *info points to a syn6288 info structure
+ * @param[out] *info pointer to a syn6288 info structure
  * @return     status code
  *             - 0 success
  *             - 2 handle is NULL

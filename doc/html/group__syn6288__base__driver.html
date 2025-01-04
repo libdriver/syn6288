@@ -512,7 +512,7 @@ Functions</h2></td></tr>
 <p>close the chip </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a syn6288 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a syn6288 handle structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -558,8 +558,8 @@ Functions</h2></td></tr>
 <p>get the current status </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a syn6288 handle structure </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*status</td><td>points to a status buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a syn6288 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*status</td><td>pointer to a status buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -605,8 +605,8 @@ Functions</h2></td></tr>
 <p>get the chip text type </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a syn6288 handle structure </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*type</td><td>points to a chip text type </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a syn6288 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*type</td><td>pointer to a chip text type </td></tr>
   </table>
   </dd>
 </dl>
@@ -641,7 +641,7 @@ Functions</h2></td></tr>
 <p>get chip's information </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">*info</td><td>points to a syn6288 info structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*info</td><td>pointer to a syn6288 info structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -675,7 +675,7 @@ Functions</h2></td></tr>
 <p>initialize the chip </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a syn6288 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a syn6288 handle structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -711,7 +711,7 @@ Functions</h2></td></tr>
 <p>pause the chip </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a syn6288 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a syn6288 handle structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -747,7 +747,7 @@ Functions</h2></td></tr>
 <p>power down the chip </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a syn6288 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a syn6288 handle structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -783,7 +783,7 @@ Functions</h2></td></tr>
 <p>resume the chip </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a syn6288 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a syn6288 handle structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -829,8 +829,8 @@ Functions</h2></td></tr>
 <p>set the chip text type </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a syn6288 handle structure </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">type</td><td>is the chip text type </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a syn6288 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">type</td><td>chip text type </td></tr>
   </table>
   </dd>
 </dl>
@@ -865,7 +865,7 @@ Functions</h2></td></tr>
 <p>stop the chip </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a syn6288 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a syn6288 handle structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -911,8 +911,8 @@ Functions</h2></td></tr>
 <p>synthesis the message </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a syn6288 handle structure </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">message</td><td>is the message type </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a syn6288 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">message</td><td>message type </td></tr>
   </table>
   </dd>
 </dl>
@@ -958,8 +958,8 @@ Functions</h2></td></tr>
 <p>synthesis the ring </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a syn6288 handle structure </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">ring</td><td>is the ring type </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a syn6288 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ring</td><td>ring type </td></tr>
   </table>
   </dd>
 </dl>
@@ -1005,8 +1005,8 @@ Functions</h2></td></tr>
 <p>synthesis the sound </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a syn6288 handle structure </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">sound</td><td>is the sound type </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a syn6288 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">sound</td><td>sound type </td></tr>
   </table>
   </dd>
 </dl>
@@ -1052,8 +1052,8 @@ Functions</h2></td></tr>
 <p>synthesis the test </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a syn6288 handle structure </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">*text</td><td>points to a test buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a syn6288 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*text</td><td>pointer to a test buffer </td></tr>
   </table>
   </dd>
 </dl>
