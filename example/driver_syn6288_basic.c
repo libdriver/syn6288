@@ -142,7 +142,7 @@ uint8_t syn6288_basic_init(void)
 
 /**
  * @brief     basic example synthesis
- * @param[in] *text points to a text buffer
+ * @param[in] *text pointer to a text buffer
  * @return    status code
  *            - 0 success
  *            - 1 synthesis failed

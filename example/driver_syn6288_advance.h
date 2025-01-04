@@ -86,7 +86,7 @@ uint8_t syn6288_advance_deinit(void);
 
 /**
  * @brief     advance example synthesis
- * @param[in] *text points to a text buffer
+ * @param[in] *text pointer to a text buffer
  * @return    status code
  *            - 0 success
  *            - 1 synthesis failed
@@ -96,7 +96,7 @@ uint8_t syn6288_advance_synthesis(char *text);
 
 /**
  * @brief     advance example play the sound
- * @param[in] sound is the sound type
+ * @param[in] sound sound type
  * @return    status code
  *            - 0 success
  *            - 1 play sound failed
@@ -106,7 +106,7 @@ uint8_t syn6288_advance_sound(syn6288_sound_t sound);
 
 /**
  * @brief     advance example play the message
- * @param[in] message is the message type
+ * @param[in] message message type
  * @return    status code
  *            - 0 success
  *            - 1 play message failed
@@ -116,7 +116,7 @@ uint8_t syn6288_advance_message(syn6288_message_t message);
 
 /**
  * @brief     advance example play the ring
- * @param[in] ring is the ring type
+ * @param[in] ring ring type
  * @return    status code
  *            - 0 success
  *            - 1 play ring failed
