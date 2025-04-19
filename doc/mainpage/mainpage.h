@@ -1,10 +1,10 @@
 /**
  * @mainpage  LibDriver SYN6288
- * @brief     LibDriver SYN6288 is a full function driver of SYN6288 and it can run in both MCU and Linux platform.
+ * @brief     LibDriver SYN6288 is a full-featured driver of SYN6288 and it can run in both MCU and Linux platform.
  * @version   2.0.0
  * @author    Shifeng Li
  *
- * <h3>history</h3>
+ * <h3>History</h3>
  * <table>
  * <tr><th>Date        <th>Version  <th>Author      <th>Description
  * <tr><td>2021/03/17  <td>2.0      <td>Shifeng Li  <td>format the code
