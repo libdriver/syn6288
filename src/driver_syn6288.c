@@ -1065,7 +1065,7 @@ uint8_t syn6288_set_synthesis_volume(syn6288_handle_t *handle, uint8_t volume)
     }
     
     memset((char *)cmd, 0, sizeof(char)*8);                       /* memory set 0 */
-    (void)snprintf((char *)cmd, 8, "v[%d]", (int16_t)volume);     /* set command */
+    (void)snprintf((char *)cmd, 8, "[v%d]", (int16_t)volume);     /* set command */
     handle->volume = volume;                                      /* save volume */
     
     return syn6288_set_command(handle, (char *)cmd);              /* write command */
@@ -1120,7 +1120,7 @@ uint8_t syn6288_set_background_volume(syn6288_handle_t *handle, uint8_t volume)
     }
     
     memset((char *)cmd, 0, sizeof(char)*8);                       /* memory set 0 */
-    (void)snprintf((char *)cmd, 8, "m[%d]", (int16_t)volume);     /* set command */
+    (void)snprintf((char *)cmd, 8, "[m%d]", (int16_t)volume);     /* set command */
     handle->background_volume = volume;                           /* save volume */
 
     return syn6288_set_command(handle, (char *)cmd);              /* write command */
@@ -1175,7 +1175,7 @@ uint8_t syn6288_set_synthesis_speed(syn6288_handle_t *handle, uint8_t speed)
     }
     
     memset((char *)cmd, 0, sizeof(char)*8);                         /* memory set 0 */
-    (void)snprintf((char *)cmd, 8, "t[%d]", (int16_t)speed);        /* set command */
+    (void)snprintf((char *)cmd, 8, "[t%d]", (int16_t)speed);        /* set command */
     handle->speed = speed;                                          /* save speed */
 
     return syn6288_set_command(handle, (char *)cmd);                /* write command */
